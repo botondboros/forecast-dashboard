@@ -12,7 +12,7 @@ import {
 // ======================================================================
 // 🔑 GOOGLE MAPS API KEY — paste your own key here
 // ======================================================================
-const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'YOUR_GOOGLE_MAPS_API_KEY_HERE';
+const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyD5XhvhT9aZDAqtG3j6fcazsOswHHq9zXc';
 
 // ---------- BRAND COLORS ----------
 const B = {

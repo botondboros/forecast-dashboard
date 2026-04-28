@@ -7,12 +7,14 @@ import {
   TrendingUp, TrendingDown, Star, Users, Moon, Banknote, X, Calendar, MapPin,
   Sparkles, Globe, Sun, AlertTriangle, CalendarDays, GraduationCap, Megaphone,
   LayoutDashboard, BarChart3, Thermometer, Waves, Flag, Droplets, Ticket, ShoppingBag, PlusCircle,
+  UtensilsCrossed, CreditCard, Wallet, Receipt, Wine, Coffee, Cookie,
+  ChevronRight, Filter, PartyPopper,
 } from 'lucide-react';
 
 // ======================================================================
 // 🔑 GOOGLE MAPS API KEY — paste your own key here
 // ======================================================================
-const GOOGLE_MAPS_API_KEY = import.meta.env.VITE_GOOGLE_MAPS_API_KEY || 'AIzaSyD5XhvhT9aZDAqtG3j6fcazsOswHHq9zXc';
+const GOOGLE_MAPS_API_KEY = 'YOUR_GOOGLE_MAPS_API_KEY_HERE';
 
 // ---------- BRAND COLORS ----------
 const B = {
@@ -50,6 +52,7 @@ const FONT_MONO = "'JetBrains Mono', ui-monospace, monospace";
 
 // ---------- CITIES (with real lat/lng for Google Maps) ----------
 const CITIES = [
+  { name: 'Sárvár',         guestLow: 3200, guestHigh: 8500, status: 'green',  size: 0.85, baseAdr: 28000, yoyV: 1.078, yoyA: 1.085, district: 'Sárvári',     lat: 47.2517, lng: 16.9367 },
   { name: 'Siófok',         guestLow: 3500, guestHigh: 5000, status: 'green',  size: 1.00, baseAdr: 33000, yoyV: 1.072, yoyA: 1.085, district: 'Siófoki',     lat: 46.9078, lng: 18.0472 },
   { name: 'Keszthely',      guestLow: 2600, guestHigh: 3500, status: 'green',  size: 0.72, baseAdr: 29000, yoyV: 1.058, yoyA: 1.080, district: 'Keszthelyi',  lat: 46.7686, lng: 17.2428 },
   { name: 'Veszprém',       guestLow: 2100, guestHigh: 2100, status: 'green',  size: 0.55, baseAdr: 26500, yoyV: 1.065, yoyA: 1.075, district: 'Veszprémi',   lat: 47.0933, lng: 17.9080 },
@@ -65,6 +68,7 @@ const CITIES = [
 // Per-city nationality profile — foreign share always < 18%
 // Top 5 foreign markets: Németország, Lengyelország, Csehország, Ausztria, Olaszország
 const CITY_NAT_PROFILES = {
+  'Sárvár':         { pct: { Magyar: 60,   Osztrák: 15, Német: 9,   Cseh: 4.5, Lengyel: 3.5, Olasz: 2.8, Szlovák: 2.5, Holland: 1.0, Brit: 0.7, Egyéb: 1.0 } },
   'Siófok':         { pct: { Magyar: 83,   Német: 6.0, Lengyel: 4.0, Cseh: 3.0, Osztrák: 2.0, Olasz: 1.0, Szlovák: 0.5, Holland: 0.3, Brit: 0.1, Egyéb: 0.1 } },
   'Keszthely':      { pct: { Magyar: 85,   Német: 7.0, Lengyel: 3.0, Cseh: 2.0, Osztrák: 1.5, Olasz: 0.8, Szlovák: 0.3, Holland: 0.2, Brit: 0.1, Egyéb: 0.1 } },
   'Veszprém':       { pct: { Magyar: 87,   Német: 5.0, Lengyel: 3.0, Cseh: 2.0, Osztrák: 1.3, Olasz: 0.8, Szlovák: 0.3, Holland: 0.2, Brit: 0.2, Egyéb: 0.2 } },
@@ -86,7 +90,7 @@ const BATHS = [
   { name: 'Gyulai Várfürdő',             city: 'Gyula',            region: 'Dél-Alföld',           weeklyTickets: 24600, avgTicket: 5200, addonPerTicket: 0.34, addonValue: 3400, yoyTickets: 3.9, yoyAddon: 5.8, nearbyCities: [{name:'Gyula',w:4800},{name:'Békéscsaba',w:1600},{name:'Sarkad',w:420},{name:'Kétegyháza',w:280}] },
   { name: 'Zalakaros Fürdő',             city: 'Zalakaros',        region: 'Nyugat-Dunántúl',      weeklyTickets: 22400, avgTicket: 5800, addonPerTicket: 0.40, addonValue: 3900, yoyTickets: 4.2, yoyAddon: 6.4, nearbyCities: [{name:'Zalakaros',w:3900},{name:'Nagykanizsa',w:1400},{name:'Galambok',w:380},{name:'Zalakomár',w:220}] },
   { name: 'Bükfürdő',                    city: 'Bük',              region: 'Nyugat-Dunántúl',      weeklyTickets: 21200, avgTicket: 6400, addonPerTicket: 0.45, addonValue: 4400, yoyTickets: 4.5, yoyAddon: 7.8, nearbyCities: [{name:'Bük',w:3600},{name:'Sárvár',w:1200},{name:'Szombathely',w:920},{name:'Répcelak',w:280}] },
-  { name: 'Sárvári Gyógyfürdő',          city: 'Sárvár',           region: 'Nyugat-Dunántúl',      weeklyTickets: 19800, avgTicket: 6200, addonPerTicket: 0.41, addonValue: 4100, yoyTickets: 3.6, yoyAddon: 6.0, nearbyCities: [{name:'Sárvár',w:3400},{name:'Szombathely',w:1100},{name:'Celldömölk',w:420},{name:'Ikervár',w:180}] },
+  { name: 'Sárvári Gyógyfürdő',          city: 'Sárvár',           region: 'Nyugat-Dunántúl',      weeklyTickets: 13500, avgTicket: 6800, addonPerTicket: 0.45, addonValue: 4400, yoyTickets: 5.2, yoyAddon: 7.4, nearbyCities: [{name:'Sárvár',w:5000},{name:'Szombathely',w:1400},{name:'Celldömölk',w:380},{name:'Ikervár',w:220}] },
   { name: 'Harkányi Gyógyfürdő',         city: 'Harkány',          region: 'Dél-Dunántúl',         weeklyTickets: 16400, avgTicket: 4800, addonPerTicket: 0.32, addonValue: 3200, yoyTickets: 3.2, yoyAddon: 5.1, nearbyCities: [{name:'Harkány',w:2400},{name:'Pécs',w:1800},{name:'Siklós',w:640},{name:'Villány',w:380}] },
   { name: 'Egri Termálfürdő',            city: 'Eger',             region: 'Észak-Magyarország',   weeklyTickets: 18200, avgTicket: 4600, addonPerTicket: 0.30, addonValue: 2900, yoyTickets: 4.1, yoyAddon: 5.5, nearbyCities: [{name:'Eger',w:3200},{name:'Egerszalók',w:980},{name:'Andornaktálya',w:320},{name:'Noszvaj',w:240}] },
   { name: 'Saliris Resort Egerszalók',   city: 'Egerszalók',       region: 'Észak-Magyarország',   weeklyTickets: 14600, avgTicket: 7200, addonPerTicket: 0.52, addonValue: 5400, yoyTickets: 5.8, yoyAddon: 9.2, nearbyCities: [{name:'Egerszalók',w:1800},{name:'Eger',w:2800},{name:'Demjén',w:460},{name:'Verpelét',w:220}] },
@@ -105,7 +109,7 @@ const BATH_NAT_PROFILES = {
   'Gyulai Várfürdő':              { pct: { Magyar: 82, Német: 4,   Lengyel: 3,  Cseh: 3,  Olasz: 2,  Osztrák: 2,  Szlovák: 2.5, Holland: 0.8, Brit: 0.4, Egyéb: 0.3 } },
   'Zalakaros Fürdő':              { pct: { Magyar: 65, Német: 14,  Osztrák: 7,  Cseh: 5,  Olasz: 3,  Lengyel: 3,  Szlovák: 2,   Holland: 0.6, Brit: 0.3, Egyéb: 0.1 } },
   'Bükfürdő':                     { pct: { Magyar: 62, Német: 15,  Osztrák: 10, Cseh: 5,  Olasz: 2.5, Lengyel: 2,  Szlovák: 2.4, Holland: 0.6, Brit: 0.3, Egyéb: 0.2 } },
-  'Sárvári Gyógyfürdő':           { pct: { Magyar: 68, Német: 12,  Osztrák: 9,  Cseh: 4,  Olasz: 2,  Lengyel: 2,  Szlovák: 2,   Holland: 0.6, Brit: 0.3, Egyéb: 0.1 } },
+  'Sárvári Gyógyfürdő':           { pct: { Magyar: 55,   Osztrák: 18, Német: 11,  Cseh: 5,    Lengyel: 4,  Olasz: 3,    Szlovák: 2.5, Holland: 0.8, Brit: 0.5, Egyéb: 0.2 } },
   'Harkányi Gyógyfürdő':          { pct: { Magyar: 70, Német: 11,  Osztrák: 4,  Cseh: 4,  Olasz: 3,  Lengyel: 3,  Szlovák: 3,   Holland: 1.2, Brit: 0.6, Egyéb: 0.2 } },
   'Egri Termálfürdő':             { pct: { Magyar: 80, Német: 5,   Lengyel: 4,  Cseh: 3,  Osztrák: 2,  Olasz: 2,  Szlovák: 2.5, Holland: 0.7, Brit: 0.5, Egyéb: 0.3 } },
   'Saliris Resort Egerszalók':    { pct: { Magyar: 74, Német: 8,   Lengyel: 5,  Cseh: 4,  Osztrák: 3,  Olasz: 2.4, Szlovák: 2.2, Holland: 0.8, Brit: 0.4, Egyéb: 0.2 } },
@@ -130,13 +134,17 @@ const ACC_CATEGORIES = [
 ];
 
 // ---------- HOLIDAYS + EVENTS ----------
-const HOLIDAYS = { '2026-08-20': 'Államalapítás' };
+const HOLIDAYS = {
+  '2026-05-24': 'Pünkösdvasárnap',
+  '2026-05-25': 'Pünkösdhétfő',
+  '2026-08-20': 'Államalapítás',
+};
 const EVENTS = [
-  { name: 'Auer Fesztivál',       location: 'Veszprém',      start: '2026-07-06', end: '2026-07-12', uplift: 2.4,  boost: 0.85 },
-  { name: 'Művészetek Völgye',    location: 'Kapolcs',       start: '2026-07-17', end: '2026-07-26', uplift: 3.82, boost: 2.30 },
-  { name: 'Paloznaki Jazzpiknik', location: 'Paloznak',      start: '2026-07-31', end: '2026-08-02', uplift: 1.84, boost: 0.42 },
-  { name: 'Balatoni Borhetek',    location: 'Balatonfüred',  start: '2026-08-07', end: '2026-08-20', uplift: 4.95, boost: 1.95 },
-  { name: 'STRAND Fesztivál',     location: 'Zamárdi',       start: '2026-08-19', end: '2026-08-23', uplift: 4.21, boost: 2.15 },
+  { name: 'Sárvári Pünkösdi Várjátékok',          location: 'Sárvár',         start: '2026-05-23', end: '2026-05-25', uplift: 4.45, boost: 2.65 },
+  { name: 'Bükfürdő Pünkösdi Wellness Hétvége',   location: 'Bük (15 km)',    start: '2026-05-22', end: '2026-05-25', uplift: 3.85, boost: 2.20 },
+  { name: 'Csepregi Pünkösdi Királyválasztás',    location: 'Csepreg (25 km)', start: '2026-05-24', end: '2026-05-24', uplift: 2.10, boost: 1.45 },
+  { name: 'Celldömölki Mária-kegyhely Búcsúja',   location: 'Celldömölk (25 km)', start: '2026-05-23', end: '2026-05-25', uplift: 2.40, boost: 1.55 },
+  { name: 'Kőszegi Várfesztivál',                 location: 'Kőszeg (40 km)', start: '2026-05-23', end: '2026-05-25', uplift: 2.95, boost: 1.80 },
 ];
 const EVENT_DAYS = new Set();
 EVENTS.forEach(ev => {
@@ -176,8 +184,13 @@ function generateDays(cityName) {
   const weekendBoost = 1.25 + ((charCodeSum % 11) / 100);  // 1.25-1.35
   const noiseSeed = charCodeSum;
 
+  // Spa towns have flatter seasonality (year-round wellness tourism)
+  // and don't need the 0.7 dampening that lake towns use
+  const isSpaTown = ['Sárvár', 'Hévíz', 'Bük'].includes(cityName);
+  const baseMult = isSpaTown ? 1.00 : 0.7;
+
   const days = [];
-  const start = new Date('2026-06-01');
+  const start = new Date('2026-05-01');
   const end = new Date('2026-09-15');
   let idx = 0;
   for (let d = new Date(start); d <= end; d.setDate(d.getDate() + 1), idx++) {
@@ -186,7 +199,10 @@ function generateDays(cityName) {
     const month = date.getMonth() + 1;
     const day = date.getDate();
     const dow = date.getDay();
-    const seasonal = Math.exp(-Math.pow(idx - (52 + peakShift), 2) / (2 * 28 * 28));
+    // Spa towns: flat seasonality (0.85-1.0), lake towns: sharp summer peak
+    const seasonal = isSpaTown
+      ? 0.85 + 0.15 * Math.exp(-Math.pow(idx - (52 + peakShift), 2) / (2 * 50 * 50))
+      : Math.exp(-Math.pow(idx - (52 + peakShift), 2) / (2 * 28 * 28));
     const dowMult = [1.10, 0.78, 0.80, 0.85, 1.05, weekendBoost, weekendBoost + 0.05][dow];
     const holidayName = HOLIDAYS[iso];
     const isEvent = EVENT_DAYS.has(iso);
@@ -196,7 +212,7 @@ function generateDays(cityName) {
     const h = Math.sin(idx * 1.731 + city.size * 100 + noiseSeed) * 0.5 + 0.5;
     const noise = 0.88 + 0.22 * h;
     const guestAvg = (city.guestLow + city.guestHigh) / 2 / 7;
-    const guests = Math.round(guestAvg * 0.7 * seasonal * dowMult * holMult * evMult * noise);
+    const guests = Math.round(guestAvg * baseMult * seasonal * dowMult * holMult * evMult * noise);
     const los = 2.3 + seasonal * 1.3 + (dow === 5 || dow === 6 ? 0.25 : 0) + (holidayName ? 0.4 : 0);
     const adr = Math.round(
       city.baseAdr * (0.72 + 0.38 * seasonal)
@@ -234,7 +250,7 @@ function getCompetitorData(district) {
 function getWeatherData() {
   const days = ['Hé', 'Ke', 'Sze', 'Cs', 'Pé', 'Szo', 'Va'];
   const dates = [];
-  const base = new Date('2026-08-07');
+  const base = new Date('2026-05-16');
   for (let i = 0; i < 7; i++) {
     const d = new Date(base); d.setDate(base.getDate() + i);
     dates.push({
@@ -246,6 +262,295 @@ function getWeatherData() {
     });
   }
   return dates;
+}
+
+// ---------- LOCATION FILTER BAR (Országos > Térség > Megye > Járás > Város) ----------
+function LocationFilterBar({ activeCity = 'Sárvár' }) {
+  // For mockup: only Sárvár is wired up. Rest are placeholders.
+  const [country] = useState('Magyarország');
+  const [region, setRegion]   = useState('Nyugat-Dunántúl');
+  const [county, setCounty]   = useState('Vas');
+  const [district, setDistrict] = useState('Sárvári');
+  const [city, setCity]       = useState(activeCity);
+
+  // Sárvár hierarchy is the only fully wired one
+  const REGIONS = ['Országos', 'Nyugat-Dunántúl', 'Balaton', 'Budapest', 'Észak-Magyarország', 'Dél-Alföld'];
+  const COUNTIES_BY_REGION = {
+    'Nyugat-Dunántúl': ['Vas', 'Zala', 'Győr-Moson-Sopron'],
+    'Balaton': ['Somogy', 'Veszprém', 'Zala'],
+    'Budapest': ['Budapest'],
+    'Észak-Magyarország': ['Heves', 'Borsod-Abaúj-Zemplén', 'Nógrád'],
+    'Dél-Alföld': ['Bács-Kiskun', 'Békés', 'Csongrád-Csanád'],
+    'Országos': ['(összes)'],
+  };
+  const DISTRICTS_BY_COUNTY = {
+    'Vas': ['Sárvári', 'Szombathelyi', 'Kőszegi', 'Körmendi'],
+    'Zala': ['Keszthelyi', 'Zalaegerszegi', 'Nagykanizsai'],
+    'Veszprém': ['Veszprémi', 'Tapolcai', 'Balatonalmádi'],
+    'Somogy': ['Siófoki', 'Marcali', 'Fonyódi'],
+    'Győr-Moson-Sopron': ['Győri', 'Soproni', 'Mosonmagyaróvári'],
+    '(összes)': ['(összes)'],
+  };
+  const CITIES_BY_DISTRICT = {
+    'Sárvári': ['Sárvár', 'Bük', 'Répcelak', 'Ikervár'],
+    'Szombathelyi': ['Szombathely', 'Vasvár'],
+    'Kőszegi': ['Kőszeg'],
+    'Körmendi': ['Körmend'],
+    'Keszthelyi': ['Keszthely', 'Hévíz', 'Vonyarcvashegy'],
+    'Siófoki': ['Siófok', 'Balatonföldvár', 'Szántód'],
+    '(összes)': ['(összes)'],
+  };
+
+  const counties   = COUNTIES_BY_REGION[region] || ['(összes)'];
+  const districts  = DISTRICTS_BY_COUNTY[county] || ['(összes)'];
+  const cities     = CITIES_BY_DISTRICT[district] || ['(összes)'];
+
+  const onRegionChange = v => {
+    setRegion(v);
+    const c = (COUNTIES_BY_REGION[v] || ['(összes)'])[0];
+    setCounty(c);
+    const d = (DISTRICTS_BY_COUNTY[c] || ['(összes)'])[0];
+    setDistrict(d);
+    const ci = (CITIES_BY_DISTRICT[d] || ['(összes)'])[0];
+    setCity(ci);
+  };
+  const onCountyChange = v => {
+    setCounty(v);
+    const d = (DISTRICTS_BY_COUNTY[v] || ['(összes)'])[0];
+    setDistrict(d);
+    const ci = (CITIES_BY_DISTRICT[d] || ['(összes)'])[0];
+    setCity(ci);
+  };
+  const onDistrictChange = v => {
+    setDistrict(v);
+    const ci = (CITIES_BY_DISTRICT[v] || ['(összes)'])[0];
+    setCity(ci);
+  };
+
+  const Sel = ({ label, value, options, onChange, disabled }) => (
+    <div style={{ flex: 1, minWidth: 110 }}>
+      <div style={{ fontSize: 9, letterSpacing: 1.2, textTransform: 'uppercase', color: B.muted, fontWeight: 700, marginBottom: 4 }}>
+        {label}
+      </div>
+      <select value={value} disabled={disabled}
+        onChange={e => onChange && onChange(e.target.value)}
+        style={{
+          width: '100%', padding: '8px 10px', borderRadius: 3,
+          border: `1px solid ${B.hairStrong}`,
+          fontFamily: FONT, fontSize: 13, fontWeight: 600,
+          color: disabled ? B.muted : B.ink,
+          background: disabled ? B.bg : B.paper,
+          cursor: disabled ? 'not-allowed' : 'pointer',
+        }}>
+        {options.map(o => <option key={o} value={o}>{o}</option>)}
+      </select>
+    </div>
+  );
+
+  return (
+    <div style={{
+      background: B.paper, borderRadius: 4, padding: '14px 18px',
+      border: `1px solid ${B.hair}`, marginBottom: 16,
+    }}>
+      <div style={{ fontSize: 10, letterSpacing: 1.6, textTransform: 'uppercase', color: B.muted, fontWeight: 700, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 8 }}>
+        <MapPin size={11} strokeWidth={2.2} />
+        Földrajzi szűrés
+        <span style={{ color: B.gold, fontWeight: 600, letterSpacing: 0, fontSize: 10, textTransform: 'none', marginLeft: 6 }}>
+          (mockup: csak Sárvár hierarchiája él)
+        </span>
+      </div>
+      <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap', alignItems: 'flex-end' }}>
+        <Sel label="Ország" value={country} options={['Magyarország']} disabled />
+        <span style={{ color: B.muted, fontSize: 14, paddingBottom: 8 }}>›</span>
+        <Sel label="Térség" value={region} options={REGIONS} onChange={onRegionChange} />
+        <span style={{ color: B.muted, fontSize: 14, paddingBottom: 8 }}>›</span>
+        <Sel label="Megye" value={county} options={counties} onChange={onCountyChange} />
+        <span style={{ color: B.muted, fontSize: 14, paddingBottom: 8 }}>›</span>
+        <Sel label="Járás" value={district} options={districts} onChange={onDistrictChange} />
+        <span style={{ color: B.muted, fontSize: 14, paddingBottom: 8 }}>›</span>
+        <Sel label="Város / település" value={city} options={cities} onChange={setCity} />
+      </div>
+    </div>
+  );
+}
+
+// ---------- WHITSUN WEEKEND FORECAST ----------
+function WhitsunForecast({ scope = 'accommodation', cityName, bathName }) {
+  // Whitsun weekend: 2026 May 23-25 (Sat-Sun-Mon)
+  // Forecast = 3-day period figures
+  let label, baseGuests, baseNights, yoyGuests, yoyNights, baseTickets, yoyTickets;
+  let foodTransactions, foodRevenue, foodBasket, yoyFoodTx, yoyFoodRev, yoyFoodBasket;
+
+  if (scope === 'accommodation') {
+    if (cityName === 'Sárvár') {
+      // Sárvár-specific realistic figures based on KSH data
+      // ~280k annual guests (commercial + private), ~900k annual nights
+      // Pentecost long weekend: peak demand, avg stay 2.9 nights
+      baseGuests = 4280;
+      baseNights = 12410;
+      yoyGuests = 7.8;
+      yoyNights = 8.6;
+    } else {
+      const c = CITIES.find(x => x.name === cityName) || CITIES[0];
+      const dailyAvg = (c.guestLow + c.guestHigh) / 2 / 7;
+      // Whitsun is a long weekend — multiplier ~2.4× normal weekend
+      baseGuests = Math.round(dailyAvg * 3 * 1.85);
+      baseNights = Math.round(baseGuests * 2.6);
+      yoyGuests = Number(((c.yoyV - 1) * 100 + 1.4).toFixed(1));
+      yoyNights = Number(((c.yoyV - 1) * 100 + 2.1).toFixed(1));
+    }
+  } else if (scope === 'baths') {
+    if (bathName === 'Sárvári Gyógyfürdő') {
+      // Realistic Pentecost weekend figures for Sárvári Gyógyfürdő
+      // ~700k annual tickets, peak weekend with high day-tripper share (~50%)
+      baseTickets = 9200;   // 3-day ticket sales (peak demand, ~110% of avg week)
+      baseGuests = 4850;    // unique overnight guests (~55% of tickets, rest are day-trippers)
+      baseNights = 12320;   // overnight nights (avg 2.5 nights for long weekend)
+      yoyTickets = 7.6;
+      yoyGuests = 7.2;
+      yoyNights = 8.4;
+    } else {
+      const b = BATHS.find(x => x.name === bathName) || BATHS[0];
+      baseTickets = Math.round(b.weeklyTickets * 0.62); // 3-day weekend share
+      baseGuests = Math.round(baseTickets * 0.82);
+      baseNights = Math.round(baseGuests * 2.1);
+      yoyGuests = Number((b.yoyTickets + 1.2).toFixed(1));
+      yoyNights = Number((b.yoyTickets + 1.8).toFixed(1));
+      yoyTickets = Number((b.yoyTickets + 2.4).toFixed(1));
+    }
+  } else {
+    // food / hospitality
+    foodTransactions = 1_240_000; // 3-day national hospitality transactions
+    foodRevenue = 9.4; // billion Ft (gross)
+    foodBasket = 7560;
+    yoyFoodTx = 7.2;
+    yoyFoodRev = 9.8;
+    yoyFoodBasket = 2.4;
+  }
+
+  return (
+    <div style={{
+      background: B.paper, borderRadius: 4, border: `1px solid ${B.hair}`,
+      marginBottom: 20, overflow: 'hidden',
+    }}>
+      <div style={{
+        background: `linear-gradient(135deg, ${B.gold} 0%, #B8860B 100%)`,
+        padding: '8px 20px', color: '#FFFFFF',
+        display: 'inline-flex', alignItems: 'center', gap: 8,
+        fontSize: 11, letterSpacing: 2, textTransform: 'uppercase', fontWeight: 700,
+        borderBottomRightRadius: 4,
+      }}>
+        ⭐ Pünkösdi hétvége előrejelzés
+      </div>
+      <div style={{ padding: '20px 26px 22px' }}>
+        <h2 style={{ fontSize: 20, margin: 0, fontWeight: 700, letterSpacing: -0.3 }}>
+          Pünkösdi hétvége (2026. május 23. – május 25.) előrejelzés
+        </h2>
+        <div style={{ fontSize: 12, color: B.muted, marginTop: 4, marginBottom: 18 }}>
+          {scope === 'accommodation' ? `${cityName} szálláshelyek` : scope === 'baths' ? bathName : 'Magyarországi vendéglátás'} · 3 napos időszak · YoY összehasonlítás 2025 pünkösdjével
+        </div>
+
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: scope === 'accommodation' ? 'repeat(2, 1fr)' : 'repeat(3, 1fr)',
+          gap: 12,
+        }}>
+          {scope === 'baths' && (
+            <div style={{ padding: '16px 18px', background: B.bg, borderRadius: 3, borderLeft: `3px solid ${B.blue}` }}>
+              <div style={{ fontSize: 10, letterSpacing: 1.3, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>
+                Várható jegyértékesítés
+              </div>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 26, fontWeight: 700, marginTop: 6, color: B.ink }}>
+                {baseTickets.toLocaleString('hu-HU')}<span style={{ fontSize: 12, fontWeight: 500, color: B.inkSoft, marginLeft: 4 }}>db</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6, color: B.green, fontSize: 12, fontWeight: 700 }}>
+                <TrendingUp size={12} strokeWidth={2.5} />
+                +{yoyTickets}% <span style={{ color: B.muted, fontWeight: 500 }}>YoY</span>
+              </div>
+            </div>
+          )}
+
+          {scope !== 'food' && (
+            <div style={{ padding: '16px 18px', background: B.bg, borderRadius: 3, borderLeft: `3px solid ${B.navy}` }}>
+              <div style={{ fontSize: 10, letterSpacing: 1.3, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>
+                Várható vendégszám
+              </div>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 26, fontWeight: 700, marginTop: 6, color: B.ink }}>
+                {baseGuests.toLocaleString('hu-HU')}<span style={{ fontSize: 12, fontWeight: 500, color: B.inkSoft, marginLeft: 4 }}>fő</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6, color: B.green, fontSize: 12, fontWeight: 700 }}>
+                <TrendingUp size={12} strokeWidth={2.5} />
+                +{yoyGuests}% <span style={{ color: B.muted, fontWeight: 500 }}>YoY</span>
+              </div>
+            </div>
+          )}
+
+          {scope !== 'food' && (
+            <div style={{ padding: '16px 18px', background: B.bg, borderRadius: 3, borderLeft: `3px solid ${B.lake}` }}>
+              <div style={{ fontSize: 10, letterSpacing: 1.3, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>
+                Várható vendégéjszaka
+              </div>
+              <div style={{ fontFamily: FONT_MONO, fontSize: 26, fontWeight: 700, marginTop: 6, color: B.ink }}>
+                {baseNights.toLocaleString('hu-HU')}<span style={{ fontSize: 12, fontWeight: 500, color: B.inkSoft, marginLeft: 4 }}>éj</span>
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6, color: B.green, fontSize: 12, fontWeight: 700 }}>
+                <TrendingUp size={12} strokeWidth={2.5} />
+                +{yoyNights}% <span style={{ color: B.muted, fontWeight: 500 }}>YoY</span>
+              </div>
+            </div>
+          )}
+
+          {scope === 'food' && (
+            <>
+              <div style={{ padding: '16px 18px', background: B.bg, borderRadius: 3, borderLeft: `3px solid ${B.navy}` }}>
+                <div style={{ fontSize: 10, letterSpacing: 1.3, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>
+                  Várható tranzakciószám
+                </div>
+                <div style={{ fontFamily: FONT_MONO, fontSize: 26, fontWeight: 700, marginTop: 6, color: B.ink }}>
+                  {(foodTransactions / 1e6).toFixed(2)}<span style={{ fontSize: 12, fontWeight: 500, color: B.inkSoft, marginLeft: 4 }}>M db</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6, color: B.green, fontSize: 12, fontWeight: 700 }}>
+                  <TrendingUp size={12} strokeWidth={2.5} />
+                  +{yoyFoodTx}% <span style={{ color: B.muted, fontWeight: 500 }}>YoY</span>
+                </div>
+              </div>
+              <div style={{ padding: '16px 18px', background: B.bg, borderRadius: 3, borderLeft: `3px solid ${B.lake}` }}>
+                <div style={{ fontSize: 10, letterSpacing: 1.3, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>
+                  Várható bruttó árbevétel
+                </div>
+                <div style={{ fontFamily: FONT_MONO, fontSize: 26, fontWeight: 700, marginTop: 6, color: B.ink }}>
+                  {foodRevenue.toFixed(1)}<span style={{ fontSize: 12, fontWeight: 500, color: B.inkSoft, marginLeft: 4 }}>Mrd Ft</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6, color: B.green, fontSize: 12, fontWeight: 700 }}>
+                  <TrendingUp size={12} strokeWidth={2.5} />
+                  +{yoyFoodRev}% <span style={{ color: B.muted, fontWeight: 500 }}>YoY</span>
+                </div>
+              </div>
+              <div style={{ padding: '16px 18px', background: B.bg, borderRadius: 3, borderLeft: `3px solid ${B.gold}` }}>
+                <div style={{ fontSize: 10, letterSpacing: 1.3, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>
+                  Átl. kosárérték (bruttó)
+                </div>
+                <div style={{ fontFamily: FONT_MONO, fontSize: 26, fontWeight: 700, marginTop: 6, color: B.ink }}>
+                  {foodBasket.toLocaleString('hu-HU')}<span style={{ fontSize: 12, fontWeight: 500, color: B.inkSoft, marginLeft: 4 }}>Ft</span>
+                </div>
+                <div style={{ display: 'flex', alignItems: 'center', gap: 4, marginTop: 6, color: B.green, fontSize: 12, fontWeight: 700 }}>
+                  <TrendingUp size={12} strokeWidth={2.5} />
+                  +{yoyFoodBasket}% <span style={{ color: B.muted, fontWeight: 500 }}>YoY</span>
+                </div>
+              </div>
+            </>
+          )}
+        </div>
+
+        <div style={{
+          marginTop: 14, padding: '10px 14px', background: `${B.gold}15`,
+          borderRadius: 3, fontSize: 11, color: B.inkSoft, borderLeft: `2px solid ${B.gold}`,
+        }}>
+          <strong style={{ color: B.gold }}>Kiemelt időszak:</strong> a hosszú hétvége miatt a foglalási görbe a múlt heti csúcson is felül teljesít. A modell javasolja a kapacitás és személyzet előzetes felkészítését.
+        </div>
+      </div>
+    </div>
+  );
 }
 
 // ---------- GOOGLE MAP ----------
@@ -978,9 +1283,365 @@ function CompetitorsView() {
   );
 }
 
+// ---------- HOSPITALITY VIEW ----------
+function HospitalityView() {
+  const [horizon, setHorizon] = useState('week');
+  const [region, setRegion] = useState('Összes régió');
+
+  const REGIONS = ['Összes régió', 'Balaton', 'Budapest', 'Észak-Magyarország', 'Dél-Alföld', 'Nyugat-Dunántúl'];
+  const REGION_MULT = {
+    'Összes régió': 1.00,
+    'Balaton': 0.42,
+    'Budapest': 0.78,
+    'Észak-Magyarország': 0.34,
+    'Dél-Alföld': 0.28,
+    'Nyugat-Dunántúl': 0.36,
+  };
+
+  const horizonScale = { day: 1/7, week: 1, month: 4.2 }[horizon];
+  const horizonLabel = { day: '1 napos', week: '1 hetes', month: '1 hónapos' }[horizon];
+  const regMult = REGION_MULT[region];
+
+  // KPIs (base: total industry weekly, scaled by region & horizon)
+  const baseTransactions = 2_840_000; // weekly nationwide
+  const transactions = Math.round(baseTransactions * regMult * horizonScale);
+  const avgBasketGross = 6840; // Ft
+  const grossRevenue = Math.round(transactions * avgBasketGross);
+  const netRevenue = Math.round(grossRevenue / 1.27); // 27% ÁFA
+  const avgBasketNet = Math.round(avgBasketGross / 1.27);
+
+  // Time series — 12 weeks for chart
+  const weeks = [];
+  for (let i = 0; i < 12; i++) {
+    const seasonal = 0.78 + 0.42 * Math.sin((i - 2) * 0.45);
+    const noise = 0.92 + ((i * 13) % 17) / 100;
+    const w = Math.round(baseTransactions * regMult * seasonal * noise * avgBasketGross / 1e6);
+    weeks.push({
+      week: `W${30 + i}`,
+      bruttó: w,
+      nettó: Math.round(w / 1.27),
+      tranzakció: Math.round(baseTransactions * regMult * seasonal * noise / 1000),
+    });
+  }
+
+  // Payment method breakdown
+  const payments = [
+    { name: 'Bankkártya',              pct: 48.2, color: B.blue,        icon: CreditCard, yoy: 4.2 },
+    { name: 'Készpénz',                pct: 22.4, color: B.gold,        icon: Wallet,     yoy: -3.8 },
+    { name: 'SZÉP-kártya',             pct: 19.6, color: B.green,       icon: Receipt,    yoy: 5.6 },
+    { name: 'Egyéb elektronikus',      pct: 9.8,  color: B.lake,        icon: Sparkles,   yoy: 11.4 },
+  ];
+
+  // Product category breakdown
+  const products = [
+    { name: 'Étel',                     pct: 56.8, color: B.navy,        icon: UtensilsCrossed, avgItem: 4250 },
+    { name: 'Alkoholmentes ital',       pct: 16.4, color: B.blueBright,  icon: Coffee,          avgItem: 980 },
+    { name: 'Alkoholos ital',           pct: 18.2, color: B.red,         icon: Wine,            avgItem: 1840 },
+    { name: 'Egyéb tételek',            pct: 8.6,  color: B.muted,       icon: Cookie,          avgItem: 620 },
+  ];
+
+  // Vat-distinct sub-totals (driven by basket composition)
+  const dailyAvgGross = Math.round(grossRevenue / (horizonDays => ({ day: 1, week: 7, month: 30 }[horizon]))(horizon));
+  const horizonDaysCount = { day: 1, week: 7, month: 30 }[horizon];
+  const dailyGross = Math.round(grossRevenue / horizonDaysCount);
+  const dailyNet = Math.round(netRevenue / horizonDaysCount);
+
+  return (
+    <>
+      {/* LOCATION FILTER */}
+      <LocationFilterBar activeCity="Sárvár" />
+
+      {/* WHITSUN FORECAST */}
+      <WhitsunForecast scope="food" />
+
+      {/* SELECTOR */}
+      <div style={{ background: B.paper, borderRadius: 4, padding: '20px 24px', border: `1px solid ${B.hair}`, marginBottom: 20 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
+          <div style={{ flex: '1 1 280px' }}>
+            <div style={{ fontSize: 10, letterSpacing: 1.8, textTransform: 'uppercase', color: B.muted, fontWeight: 700, marginBottom: 8 }}>
+              Régió
+            </div>
+            <select value={region} onChange={e => setRegion(e.target.value)}
+              style={{
+                width: '100%', padding: '12px 14px', borderRadius: 3,
+                border: `1px solid ${B.hairStrong}`,
+                fontFamily: FONT, fontSize: 15, fontWeight: 700, color: B.navy,
+                background: B.paper, cursor: 'pointer',
+              }}>
+              {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
+            </select>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 10, fontSize: 12, color: B.inkSoft }}>
+              <UtensilsCrossed size={13} color={B.red} strokeWidth={2} />
+              Vendéglátóhelyek és éttermek forgalmi mutatói
+            </div>
+          </div>
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-end' }}>
+            <div style={{ fontSize: 10, letterSpacing: 1.5, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>
+              Időszak
+            </div>
+            <div style={{ display: 'flex', background: B.bg, borderRadius: 3, padding: 3, border: `1px solid ${B.hair}` }}>
+              {[{v:'day',l:'1 nap'},{v:'week',l:'1 hét'},{v:'month',l:'1 hónap'}].map(h => (
+                <button key={h.v} onClick={() => setHorizon(h.v)}
+                  style={{
+                    padding: '7px 14px', border: 'none', borderRadius: 2,
+                    background: horizon === h.v ? B.navy : 'transparent',
+                    color: horizon === h.v ? B.paper : B.inkSoft,
+                    fontFamily: FONT, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                  }}>
+                  {h.l}
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* SECTION 1: FORGALMI ADATOK */}
+      <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+        <Banknote size={16} color={B.navy} strokeWidth={2.2} />
+        <h2 style={{ fontSize: 17, margin: 0, fontWeight: 700, letterSpacing: -0.2, color: B.navy }}>
+          Forgalmi adatok
+        </h2>
+        <span style={{ fontSize: 11, color: B.muted, fontWeight: 500 }}>· {horizonLabel} kitekintés · {region}</span>
+      </div>
+
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 14 }}>
+        <KpiCard label={`Bruttó árbevétel`} value={(grossRevenue / 1e9).toFixed(2)} unit="Mrd Ft" delta={6.4} icon={Banknote} accent={B.navy} />
+        <KpiCard label={`Nettó árbevétel`} value={(netRevenue / 1e9).toFixed(2)} unit="Mrd Ft" delta={6.4} icon={Banknote} accent={B.blue} />
+        <KpiCard label={`Tranzakciók száma`} value={(transactions / 1e6).toFixed(2)} unit="M db" delta={4.8} icon={Receipt} accent={B.lake} />
+        <KpiCard label={`Átl. kosárérték (bruttó)`} value={avgBasketGross.toLocaleString('hu-HU')} unit="Ft" delta={1.5} icon={ShoppingBag} accent={B.gold} />
+      </div>
+
+      {/* Daily averages strip */}
+      <div style={{ background: B.paper, borderRadius: 4, padding: '14px 22px', border: `1px solid ${B.hair}`, marginBottom: 20, display: 'flex', justifyContent: 'space-around', flexWrap: 'wrap', gap: 12 }}>
+        <div>
+          <div style={{ fontSize: 9, letterSpacing: 1.3, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>Átl. napi bruttó</div>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 17, fontWeight: 700, color: B.navy, marginTop: 2 }}>
+            {(dailyGross / 1e6).toFixed(1)} M Ft
+          </div>
+        </div>
+        <div>
+          <div style={{ fontSize: 9, letterSpacing: 1.3, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>Átl. napi nettó</div>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 17, fontWeight: 700, color: B.blue, marginTop: 2 }}>
+            {(dailyNet / 1e6).toFixed(1)} M Ft
+          </div>
+        </div>
+        <div>
+          <div style={{ fontSize: 9, letterSpacing: 1.3, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>Átl. kosárérték (nettó)</div>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 17, fontWeight: 700, color: B.lake, marginTop: 2 }}>
+            {avgBasketNet.toLocaleString('hu-HU')} Ft
+          </div>
+        </div>
+        <div>
+          <div style={{ fontSize: 9, letterSpacing: 1.3, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>Tranzakció / nap</div>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 17, fontWeight: 700, color: B.gold, marginTop: 2 }}>
+            {Math.round(transactions / horizonDaysCount).toLocaleString('hu-HU')} db
+          </div>
+        </div>
+        <div>
+          <div style={{ fontSize: 9, letterSpacing: 1.3, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>ÁFA hatás</div>
+          <div style={{ fontFamily: FONT_MONO, fontSize: 17, fontWeight: 700, color: B.red, marginTop: 2 }}>
+            27%
+          </div>
+        </div>
+      </div>
+
+      {/* TIME SERIES CHART */}
+      <div style={{ background: B.paper, borderRadius: 4, padding: '24px 28px 16px', border: `1px solid ${B.hair}`, marginBottom: 20 }}>
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16, flexWrap: 'wrap', gap: 12 }}>
+          <div>
+            <h2 style={{ fontSize: 18, margin: 0, fontWeight: 700, letterSpacing: -0.2 }}>
+              Idősoros bontás · heti
+            </h2>
+            <div style={{ fontSize: 12, color: B.muted, marginTop: 2 }}>
+              Bruttó és nettó árbevétel + tranzakciószám · 12 hetes szezon
+            </div>
+          </div>
+          <div style={{ display: 'flex', gap: 16, fontSize: 11, color: B.inkSoft }}>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ width: 14, height: 3, background: B.navy, borderRadius: 2 }} /> Bruttó (M Ft)
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ width: 14, height: 3, background: B.blueBright, borderRadius: 2 }} /> Nettó (M Ft)
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+              <span style={{ width: 14, height: 3, background: B.gold, borderRadius: 2 }} /> Tranzakció (ezer db)
+            </div>
+          </div>
+        </div>
+        <ResponsiveContainer width="100%" height={260}>
+          <LineChart data={weeks} margin={{ top: 8, right: 12, bottom: 4, left: 4 }}>
+            <CartesianGrid stroke={B.hair} strokeDasharray="2 4" vertical={false} />
+            <XAxis dataKey="week" tick={{ fontSize: 11, fill: B.muted }} axisLine={{ stroke: B.hair }} tickLine={false} />
+            <YAxis yAxisId="left" tick={{ fontSize: 11, fill: B.muted }} axisLine={false} tickLine={false} width={50} />
+            <YAxis yAxisId="right" orientation="right" tick={{ fontSize: 11, fill: B.muted }} axisLine={false} tickLine={false} width={50} />
+            <Tooltip contentStyle={{ background: B.paper, border: `1px solid ${B.hair}`, borderRadius: 3, fontSize: 12, fontFamily: FONT }} />
+            <Line yAxisId="left" type="monotone" dataKey="bruttó" stroke={B.navy} strokeWidth={2.4} dot={{ r: 3, fill: B.navy }} />
+            <Line yAxisId="left" type="monotone" dataKey="nettó" stroke={B.blueBright} strokeWidth={2} dot={{ r: 3, fill: B.blueBright }} strokeDasharray="4 3" />
+            <Line yAxisId="right" type="monotone" dataKey="tranzakció" stroke={B.gold} strokeWidth={2} dot={{ r: 3, fill: B.gold }} />
+          </LineChart>
+        </ResponsiveContainer>
+      </div>
+
+      {/* SECTION 2 + 3: PAYMENTS + PRODUCTS */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+
+        {/* PAYMENTS */}
+        <div style={{ background: B.paper, borderRadius: 4, padding: '22px 26px', border: `1px solid ${B.hair}` }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+            <CreditCard size={16} color={B.blue} strokeWidth={2} />
+            <h2 style={{ fontSize: 18, margin: 0, fontWeight: 700, letterSpacing: -0.2 }}>
+              Fizetési mód szerinti bontás
+            </h2>
+          </div>
+          <div style={{ fontSize: 12, color: B.muted, marginBottom: 18 }}>
+            %-arány az összes tranzakcióból · YoY trend
+          </div>
+
+          {/* Stacked bar */}
+          <div style={{ display: 'flex', height: 36, borderRadius: 3, overflow: 'hidden', marginBottom: 14 }}>
+            {payments.map(p => (
+              <div key={p.name} style={{
+                flex: p.pct, background: p.color,
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                color: '#FFFFFF', fontSize: 11, fontWeight: 700,
+              }}>
+                {p.pct >= 12 ? `${p.pct}%` : ''}
+              </div>
+            ))}
+          </div>
+
+          {/* Detail rows */}
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+            {payments.map(p => {
+              const Icon = p.icon;
+              const positive = p.yoy >= 0;
+              const value = Math.round(transactions * p.pct / 100);
+              const revenue = Math.round(grossRevenue * p.pct / 100);
+              return (
+                <div key={p.name} style={{
+                  display: 'flex', alignItems: 'center', gap: 12,
+                  padding: '10px 12px', background: B.bg, borderRadius: 3,
+                  borderLeft: `3px solid ${p.color}`,
+                }}>
+                  <div style={{
+                    width: 30, height: 30, borderRadius: '50%',
+                    background: `${p.color}20`,
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    color: p.color, flexShrink: 0,
+                  }}>
+                    <Icon size={15} strokeWidth={2} />
+                  </div>
+                  <div style={{ flex: 1, minWidth: 0 }}>
+                    <div style={{ fontSize: 13, fontWeight: 700, color: B.ink }}>{p.name}</div>
+                    <div style={{ fontFamily: FONT_MONO, fontSize: 11, color: B.inkSoft, marginTop: 2 }}>
+                      {value.toLocaleString('hu-HU')} db · {(revenue / 1e6).toFixed(1)} M Ft
+                    </div>
+                  </div>
+                  <div style={{ textAlign: 'right' }}>
+                    <div style={{ fontFamily: FONT_MONO, fontSize: 16, fontWeight: 700, color: p.color }}>
+                      {p.pct}%
+                    </div>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: 3, justifyContent: 'flex-end', fontSize: 10, color: positive ? B.green : B.red, fontWeight: 700, marginTop: 2 }}>
+                      {positive ? <TrendingUp size={10} strokeWidth={2.5} /> : <TrendingDown size={10} strokeWidth={2.5} />}
+                      {positive ? '+' : ''}{p.yoy}%
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+
+        {/* PRODUCTS */}
+        <div style={{ background: B.paper, borderRadius: 4, padding: '22px 26px', border: `1px solid ${B.hair}` }}>
+          <div style={{ display: 'flex', alignItems: 'center', gap: 8, marginBottom: 4 }}>
+            <UtensilsCrossed size={16} color={B.red} strokeWidth={2} />
+            <h2 style={{ fontSize: 18, margin: 0, fontWeight: 700, letterSpacing: -0.2 }}>
+              Termékkategória szerinti bontás
+            </h2>
+          </div>
+          <div style={{ fontSize: 12, color: B.muted, marginBottom: 18 }}>
+            Étel / Ital / Egyéb · árbevétel megoszlása
+          </div>
+
+          {/* Donut chart */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
+            <div style={{ width: 160, height: 160, position: 'relative', flexShrink: 0 }}>
+              <ResponsiveContainer width="100%" height="100%">
+                <PieChart>
+                  <Pie data={products} dataKey="pct" innerRadius={50} outerRadius={76}
+                    startAngle={90} endAngle={-270} stroke="none">
+                    {products.map((p, i) => <Cell key={i} fill={p.color} />)}
+                  </Pie>
+                </PieChart>
+              </ResponsiveContainer>
+              <div style={{ position: 'absolute', inset: 0, display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center', pointerEvents: 'none' }}>
+                <div style={{ fontSize: 9, textTransform: 'uppercase', letterSpacing: 1.3, color: B.muted, fontWeight: 700 }}>Bruttó</div>
+                <div style={{ fontSize: 18, fontWeight: 700, color: B.navy }}>
+                  {(grossRevenue / 1e9).toFixed(1)}
+                </div>
+                <div style={{ fontSize: 10, color: B.muted }}>Mrd Ft</div>
+              </div>
+            </div>
+            <div style={{ flex: 1, minWidth: 0, display: 'flex', flexDirection: 'column', gap: 8 }}>
+              {products.map(p => {
+                const Icon = p.icon;
+                const revenue = Math.round(grossRevenue * p.pct / 100);
+                return (
+                  <div key={p.name} style={{
+                    display: 'flex', alignItems: 'center', gap: 10,
+                    padding: '8px 10px', background: B.bg, borderRadius: 3,
+                    borderLeft: `3px solid ${p.color}`,
+                  }}>
+                    <Icon size={14} color={p.color} strokeWidth={2} style={{ flexShrink: 0 }} />
+                    <div style={{ flex: 1, minWidth: 0 }}>
+                      <div style={{ fontSize: 12, fontWeight: 700, color: B.ink }}>{p.name}</div>
+                      <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: B.muted, marginTop: 1 }}>
+                        átl. {p.avgItem.toLocaleString('hu-HU')} Ft / tétel
+                      </div>
+                    </div>
+                    <div style={{ textAlign: 'right' }}>
+                      <div style={{ fontFamily: FONT_MONO, fontSize: 13, fontWeight: 700, color: p.color }}>
+                        {p.pct}%
+                      </div>
+                      <div style={{ fontFamily: FONT_MONO, fontSize: 10, color: B.inkSoft }}>
+                        {(revenue / 1e6).toFixed(0)} M Ft
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          {/* Insight footer */}
+          <div style={{
+            marginTop: 16, padding: '10px 12px', background: `${B.red}10`,
+            borderRadius: 3, fontSize: 11, color: B.inkSoft, borderLeft: `2px solid ${B.red}`,
+          }}>
+            <strong style={{ color: B.red }}>Megjegyzés:</strong> az alkoholos italok aránya nyári szezonban
+            jellemzően 2–4 százalékponttal magasabb, mint az éves átlag.
+          </div>
+        </div>
+      </div>
+
+      <div style={{
+        padding: '14px 18px', background: `${B.gold}15`,
+        border: `1px dashed ${B.gold}70`, borderRadius: 3,
+        fontSize: 12, color: B.inkSoft, marginBottom: 20,
+      }}>
+        <strong style={{ color: B.gold }}>Mockup:</strong> a bemutatott vendéglátóipari mutatók placeholder
+        adatok. Éles üzemben az NTAK vendéglátás-modul, a NAV online pénztárgép adatszolgáltatás és a
+        szakmai szövetségi adatok kerülnének a helyükre.
+      </div>
+    </>
+  );
+}
+
 // ---------- BATHS VIEW ----------
 function BathsView() {
-  const [bathName, setBathName] = useState(BATHS[0].name);
+  const [bathName, setBathName] = useState('Sárvári Gyógyfürdő');
   const [horizon, setHorizon] = useState('week');
   const bath = BATHS.find(b => b.name === bathName);
   const profile = BATH_NAT_PROFILES[bathName];
@@ -1033,6 +1694,12 @@ function BathsView() {
 
   return (
     <>
+      {/* LOCATION FILTER */}
+      <LocationFilterBar activeCity={bath.city} />
+
+      {/* WHITSUN FORECAST */}
+      <WhitsunForecast scope="baths" bathName={bathName} />
+
       {/* BATH SELECTOR */}
       <div style={{ background: B.paper, borderRadius: 4, padding: '20px 24px', border: `1px solid ${B.hair}`, marginBottom: 20 }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
@@ -1273,7 +1940,7 @@ function BathsView() {
 
 // ---------- MAIN ----------
 export default function BalatonDashboard() {
-  const [city, setCity] = useState('Siófok');
+  const [city, setCity] = useState('Sárvár');
   const [selectedDay, setSelectedDay] = useState(null);
   const [horizon, setHorizon] = useState('month');
   const [tab, setTab] = useState('main');
@@ -1284,8 +1951,8 @@ export default function BalatonDashboard() {
 
   const horizonDays = { day: 1, week: 7, month: 30 }[horizon];
   const horizonLabel = { day: '1 napos', week: '1 hetes', month: '1 hónapos' }[horizon];
-  // Forecast window: from today (Aug 7) forward, covering horizonDays
-  const todayIdx = days.findIndex(d => d.date === '2026-08-07');
+  // Forecast window: from today (May 15 – one week before Whitsun weekend May 23–25) forward
+  const todayIdx = days.findIndex(d => d.date === '2026-05-15');
   const windowStart = todayIdx >= 0 ? todayIdx : 0;
   const forecastWindow = days.slice(windowStart, windowStart + horizonDays);
   const totalGuests = forecastWindow.reduce((s, d) => s + d.guests, 0);
@@ -1329,8 +1996,8 @@ export default function BalatonDashboard() {
       .map(w => ({ ...w, label: new Date(w.week).toLocaleDateString('hu-HU', { month: 'short', day: 'numeric' }) }));
   }, [days, cityMeta]);
 
-  const today = new Date('2026-08-07');
-  const todayIso = '2026-08-07';
+  const today = new Date('2026-05-16');
+  const todayIso = '2026-05-15';
   const todayStr = today.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
 
   // Today's week bucket label (the Monday of the week containing today)
@@ -1407,8 +2074,8 @@ export default function BalatonDashboard() {
       }}>
         {[
           { v: 'main', l: 'Szálláshely előrejelzés', icon: LayoutDashboard },
-          { v: 'comp', l: 'Szálláshely kategóriák', icon: BarChart3 },
           { v: 'baths', l: 'Fürdők előrejelzés', icon: Droplets },
+          { v: 'food', l: 'Vendéglátás előrejelzés', icon: UtensilsCrossed },
         ].map(t => {
           const Ic = t.icon;
           const active = tab === t.v;
@@ -1432,7 +2099,7 @@ export default function BalatonDashboard() {
       <div style={{ padding: '24px 40px', maxWidth: 1400, margin: '0 auto' }}>
         <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 18, flexWrap: 'wrap', gap: 8 }}>
           <div style={{ fontSize: 13, color: B.inkSoft }}>
-            {tab !== 'baths' && (
+            {tab !== 'baths' && tab !== 'food' && (
               <>
                 Kiválasztva: <strong style={{ color: B.navy, fontSize: 17, marginLeft: 4, fontWeight: 700 }}>{city}</strong>
                 {tab === 'main' && <span style={{ marginLeft: 14, color: B.muted }}>· horizont: <strong style={{ color: B.blue }}>{horizonLabel}</strong></span>}
@@ -1443,11 +2110,22 @@ export default function BalatonDashboard() {
                 Fürdők előrejelzés · Top 15 elemzés
               </span>
             )}
+            {tab === 'food' && (
+              <span style={{ fontSize: 10, letterSpacing: 2, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>
+                Vendéglátóipar · forgalmi és fizetési adatok
+              </span>
+            )}
           </div>
         </div>
 
         {tab === 'main' && (
           <>
+            {/* LOCATION FILTER */}
+            <LocationFilterBar activeCity={city} />
+
+            {/* WHITSUN FORECAST */}
+            <WhitsunForecast scope="accommodation" cityName={city} />
+
             {/* TOP CITY SELECTOR */}
             <TopCitySelector selectedCity={city} onSelect={setCity} />
 
@@ -1519,7 +2197,7 @@ export default function BalatonDashboard() {
                   <Area type="monotone" dataKey="guests" stroke={B.blue} strokeWidth={2.2} fill="url(#cur)" />
                   <Area type="monotone" dataKey="prev" stroke={B.muted} strokeWidth={1.2} strokeDasharray="4 3" fill="none" />
                   <ReferenceLine x={todayWeekLabel} stroke={B.red} strokeWidth={2} strokeDasharray="4 3"
-                    label={{ value: 'Ma · aug. 7.', position: 'top', fill: B.red, fontSize: 11, fontWeight: 700, fontFamily: FONT }} />
+                    label={{ value: 'Ma · máj. 15.', position: 'top', fill: B.red, fontSize: 11, fontWeight: 700, fontFamily: FONT }} />
                 </AreaChart>
               </ResponsiveContainer>
             </div>
@@ -1549,6 +2227,7 @@ export default function BalatonDashboard() {
                 </div>
               </div>
               <div style={{ display: 'flex', gap: 16 }}>
+                <MonthCalendar month={5} monthName="Május" days={days} maxGuests={maxDaily} onDayClick={setSelectedDay} />
                 <MonthCalendar month={6} monthName="Június" days={days} maxGuests={maxDaily} onDayClick={setSelectedDay} />
                 <MonthCalendar month={7} monthName="Július" days={days} maxGuests={maxDaily} onDayClick={setSelectedDay} />
                 <MonthCalendar month={8} monthName="Augusztus" days={days} maxGuests={maxDaily} onDayClick={setSelectedDay} />
@@ -1650,9 +2329,9 @@ export default function BalatonDashboard() {
           </>
         )}
 
-        {tab === 'comp' && <CompetitorsView />}
-
         {tab === 'baths' && <BathsView />}
+
+        {tab === 'food' && <HospitalityView />}
 
         <div style={{
           marginTop: 28, padding: '14px 18px', background: `${B.gold}15`,

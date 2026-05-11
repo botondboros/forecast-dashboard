@@ -84,6 +84,59 @@ const CITY_NAT_PROFILES = {
 const DISTRICTS = ['Összes járás', 'Keszthelyi', 'Siófoki', 'Tapolcai', 'Veszprémi', 'Marcali'];
 
 // ---------- TOP 15 HUNGARIAN SPAS ----------
+// ---------- SÁRVÁRI JÁRÁS PROVIDERS ----------
+// Valós szolgáltatók a Sárvári járáshoz, realisztikus placeholder számokkal
+const DISTRICTS_SARVAR = ['Sárvári járás', 'Szombathelyi járás', 'Kőszegi járás'];
+
+const ACCOMMODATIONS = {
+  'Sárvári járás': [
+    { name: 'Park Inn by Radisson Sárvár Resort & Spa', city: 'Sárvár',  category: 'Hotel 4★',  rooms: 152, weeklyGuests: 1840, avgAdr: 38500, los: 2.4, occupancy: 78, yoyGuests: 6.8, yoyAdr: 8.4, foreignPct: 48 },
+    { name: 'Spirit Hotel Thermal Spa',                 city: 'Sárvár',  category: 'Hotel 5★',  rooms: 272, weeklyGuests: 3160, avgAdr: 62000, los: 2.8, occupancy: 82, yoyGuests: 7.4, yoyAdr: 9.2, foreignPct: 54 },
+    { name: 'Hotel Bassiana',                            city: 'Sárvár',  category: 'Hotel 4★',  rooms: 88,  weeklyGuests: 980,  avgAdr: 28500, los: 2.3, occupancy: 74, yoyGuests: 5.8, yoyAdr: 7.2, foreignPct: 42 },
+    { name: 'Vadkert Major',                             city: 'Sárvár',  category: 'Panzió',     rooms: 24,  weeklyGuests: 220,  avgAdr: 18500, los: 1.9, occupancy: 68, yoyGuests: 4.2, yoyAdr: 5.8, foreignPct: 38 },
+    { name: 'Tinódi Hotel',                              city: 'Sárvár',  category: 'Hotel 3★',  rooms: 42,  weeklyGuests: 380,  avgAdr: 21500, los: 2.0, occupancy: 71, yoyGuests: 5.4, yoyAdr: 6.5, foreignPct: 40 },
+  ],
+  'Szombathelyi járás': [
+    { name: 'Hotel Wagner Szombathely',                  city: 'Szombathely', category: 'Hotel 4★',  rooms: 60, weeklyGuests: 540, avgAdr: 28000, los: 1.8, occupancy: 70, yoyGuests: 4.8, yoyAdr: 6.4, foreignPct: 32 },
+    { name: 'Hotel Claudius',                            city: 'Szombathely', category: 'Hotel 4★',  rooms: 110, weeklyGuests: 920, avgAdr: 26500, los: 1.7, occupancy: 68, yoyGuests: 4.4, yoyAdr: 6.0, foreignPct: 28 },
+    { name: 'Hotel Liget',                               city: 'Szombathely', category: 'Hotel 3★',  rooms: 44, weeklyGuests: 360, avgAdr: 19500, los: 1.6, occupancy: 65, yoyGuests: 3.8, yoyAdr: 5.2, foreignPct: 24 },
+  ],
+  'Kőszegi járás': [
+    { name: 'Írottkő Hotel',                             city: 'Kőszeg', category: 'Hotel 3★',  rooms: 38, weeklyGuests: 320, avgAdr: 22000, los: 2.1, occupancy: 72, yoyGuests: 5.2, yoyAdr: 6.8, foreignPct: 36 },
+    { name: 'Bástya Wellness Hotel',                     city: 'Kőszeg', category: 'Hotel 4★',  rooms: 54, weeklyGuests: 510, avgAdr: 27500, los: 2.2, occupancy: 76, yoyGuests: 6.0, yoyAdr: 7.4, foreignPct: 38 },
+  ],
+};
+
+const SPAS = {
+  'Sárvári járás': [
+    { name: 'Sárvári Gyógy-, és Wellnessfürdő', city: 'Sárvár', weeklyTickets: 13500, avgTicket: 6800, addonPerTicket: 0.45, addonValue: 4400, yoyTickets: 5.2, yoyAddon: 7.4, foreignPct: 45 },
+    { name: 'Spirit Hotel Wellness Részleg',     city: 'Sárvár', weeklyTickets: 2800,  avgTicket: 14500, addonPerTicket: 0.62, addonValue: 8600, yoyTickets: 6.8, yoyAddon: 9.2, foreignPct: 58 },
+  ],
+  'Szombathelyi járás': [
+    { name: 'AquaCity Élményfürdő',              city: 'Szombathely', weeklyTickets: 6400, avgTicket: 4200, addonPerTicket: 0.32, addonValue: 2800, yoyTickets: 3.8, yoyAddon: 4.6, foreignPct: 18 },
+  ],
+  'Kőszegi járás': [
+    { name: 'Kőszegi Sport- és Fürdőcentrum',    city: 'Kőszeg', weeklyTickets: 1850, avgTicket: 3200, addonPerTicket: 0.24, addonValue: 1900, yoyTickets: 2.6, yoyAddon: 3.2, foreignPct: 22 },
+  ],
+};
+
+const RESTAURANTS = {
+  'Sárvári járás': [
+    { name: 'Onyx Garden Cafe',                   city: 'Sárvár',  category: 'Fine dining / Bistro', seats: 80,  weeklyTransactions: 1240, avgBasket: 11200, yoyTx: 8.4, yoyBasket: 6.8, foodPct: 58, alcoholPct: 22, nonAlcoholPct: 16, otherPct: 4 },
+    { name: 'Platán Étterem (Spirit Hotel)',      city: 'Sárvár',  category: 'Hotel étterem',          seats: 180, weeklyTransactions: 2680, avgBasket: 14500, yoyTx: 7.2, yoyBasket: 8.4, foodPct: 62, alcoholPct: 20, nonAlcoholPct: 15, otherPct: 3 },
+    { name: 'Várkapu Vendéglő',                   city: 'Sárvár',  category: 'Magyar konyha',          seats: 65,  weeklyTransactions: 980,  avgBasket: 6400,  yoyTx: 5.6, yoyBasket: 5.2, foodPct: 55, alcoholPct: 24, nonAlcoholPct: 18, otherPct: 3 },
+    { name: 'Korona Étterem',                     city: 'Sárvár',  category: 'Magyar konyha',          seats: 90,  weeklyTransactions: 1420, avgBasket: 5800,  yoyTx: 4.8, yoyBasket: 4.6, foodPct: 56, alcoholPct: 26, nonAlcoholPct: 16, otherPct: 2 },
+    { name: 'Nádasdy Vár Cafe',                   city: 'Sárvár',  category: 'Kávézó',                 seats: 40,  weeklyTransactions: 1820, avgBasket: 2400,  yoyTx: 9.2, yoyBasket: 5.4, foodPct: 28, alcoholPct: 8,  nonAlcoholPct: 60, otherPct: 4 },
+  ],
+  'Szombathelyi járás': [
+    { name: 'Pannónia Étterem',                   city: 'Szombathely', category: 'Magyar konyha', seats: 110, weeklyTransactions: 1640, avgBasket: 6800, yoyTx: 5.2, yoyBasket: 5.4, foodPct: 58, alcoholPct: 22, nonAlcoholPct: 18, otherPct: 2 },
+    { name: 'Gastland Étterem',                   city: 'Szombathely', category: 'Bistro',         seats: 70,  weeklyTransactions: 1080, avgBasket: 5400, yoyTx: 6.4, yoyBasket: 4.2, foodPct: 60, alcoholPct: 18, nonAlcoholPct: 20, otherPct: 2 },
+  ],
+  'Kőszegi járás': [
+    { name: 'Bécsikapu Étterem',                  city: 'Kőszeg', category: 'Magyar konyha', seats: 55, weeklyTransactions: 820, avgBasket: 7200, yoyTx: 4.8, yoyBasket: 5.8, foodPct: 56, alcoholPct: 26, nonAlcoholPct: 16, otherPct: 2 },
+  ],
+};
+
 // ---------- TOP ATTRACTIONS NEAR SÁRVÁR (max 15 km) ----------
 const ATTRACTIONS = [
   { name: 'Nádasdy-vár (Sárvári Vármúzeum)',     location: 'Sárvár',    distance: 0,  category: 'Vár / Múzeum',           weeklyVisitors: 4800, avgTicket: 2400, yoyVisitors: 6.4 },
@@ -121,7 +174,11 @@ const BATH_NAT_PROFILES = {
   'Gyulai Várfürdő':              { pct: { Magyar: 82, Német: 4,   Lengyel: 3,  Cseh: 3,  Olasz: 2,  Osztrák: 2,  Szlovák: 2.5, Holland: 0.8, Brit: 0.4, Egyéb: 0.3 } },
   'Zalakaros Fürdő':              { pct: { Magyar: 65, Német: 14,  Osztrák: 7,  Cseh: 5,  Olasz: 3,  Lengyel: 3,  Szlovák: 2,   Holland: 0.6, Brit: 0.3, Egyéb: 0.1 } },
   'Bükfürdő':                     { pct: { Magyar: 62, Német: 15,  Osztrák: 10, Cseh: 5,  Olasz: 2.5, Lengyel: 2,  Szlovák: 2.4, Holland: 0.6, Brit: 0.3, Egyéb: 0.2 } },
-  'Sárvári Gyógyfürdő':           { pct: { Magyar: 55,   Osztrák: 18, Német: 11,  Cseh: 5,    Lengyel: 4,  Olasz: 3,    Szlovák: 2.5, Holland: 0.8, Brit: 0.5, Egyéb: 0.2 } },
+  'Sárvári Gyógyfürdő':              { pct: { Magyar: 55,   Osztrák: 18, Német: 11,  Cseh: 5,    Lengyel: 4,  Olasz: 3,    Szlovák: 2.5, Holland: 0.8, Brit: 0.5, Egyéb: 0.2 } },
+  'Sárvári Gyógy-, és Wellnessfürdő': { pct: { Magyar: 55,   Osztrák: 18, Német: 11,  Cseh: 5,    Lengyel: 4,  Olasz: 3,    Szlovák: 2.5, Holland: 0.8, Brit: 0.5, Egyéb: 0.2 } },
+  'Spirit Hotel Wellness Részleg':    { pct: { Magyar: 42,   Osztrák: 22, Német: 16,  Cseh: 6,    Lengyel: 4,  Olasz: 4,    Szlovák: 3,   Holland: 1.6, Brit: 0.8, Egyéb: 0.6 } },
+  'AquaCity Élményfürdő':             { pct: { Magyar: 82,   Német: 5,    Osztrák: 4,  Cseh: 3,    Lengyel: 2.5,Olasz: 1.5,  Szlovák: 1.5, Holland: 0.3, Brit: 0.1, Egyéb: 0.1 } },
+  'Kőszegi Sport- és Fürdőcentrum':   { pct: { Magyar: 78,   Osztrák: 8,  Német: 5,    Cseh: 3,    Lengyel: 2.5,Olasz: 1.5,  Szlovák: 1.5, Holland: 0.3, Brit: 0.1, Egyéb: 0.1 } },
   'Harkányi Gyógyfürdő':          { pct: { Magyar: 70, Német: 11,  Osztrák: 4,  Cseh: 4,  Olasz: 3,  Lengyel: 3,  Szlovák: 3,   Holland: 1.2, Brit: 0.6, Egyéb: 0.2 } },
   'Egri Termálfürdő':             { pct: { Magyar: 80, Német: 5,   Lengyel: 4,  Cseh: 3,  Osztrák: 2,  Olasz: 2,  Szlovák: 2.5, Holland: 0.7, Brit: 0.5, Egyéb: 0.3 } },
   'Saliris Resort Egerszalók':    { pct: { Magyar: 74, Német: 8,   Lengyel: 5,  Cseh: 4,  Osztrák: 3,  Olasz: 2.4, Szlovák: 2.2, Holland: 0.8, Brit: 0.4, Egyéb: 0.2 } },
@@ -271,7 +328,7 @@ function getCompetitorData(district) {
 function getWeatherData() {
   const days = ['Hé', 'Ke', 'Sze', 'Cs', 'Pé', 'Szo', 'Va'];
   const dates = [];
-  const base = new Date('2026-05-16');
+  const base = new Date('2026-05-15');
   for (let i = 0; i < 7; i++) {
     const d = new Date(base); d.setDate(base.getDate() + i);
     dates.push({
@@ -396,63 +453,80 @@ function LocationFilterBar({ activeCity = 'Sárvár' }) {
 }
 
 // ---------- WHITSUN WEEKEND FORECAST ----------
-function WhitsunForecast({ scope = 'accommodation', cityName, bathName }) {
+function WhitsunForecast({ scope = 'accommodation', cityName, bathName, accomProvider, bathProvider }) {
   // Whitsun weekend: 2026 May 23-25 (Sat-Sun-Mon)
   // Forecast = 3-day period figures
   let label, baseGuests, baseNights, yoyGuests, yoyNights, baseTickets, yoyTickets;
   let foodTransactions, foodRevenue, foodBasket, yoyFoodTx, yoyFoodRev, yoyFoodBasket;
   let attrVisitors, attrRevenue, attrTopCategory, yoyAttrVisitors, yoyAttrRevenue;
+  let providerLabel = '';
 
   if (scope === 'accommodation') {
-    if (cityName === 'Sárvár') {
-      // Sárvár-specific realistic figures based on KSH data
-      // ~280k annual guests (commercial + private), ~900k annual nights
-      // Pentecost long weekend: peak demand, avg stay 2.9 nights
+    // Use provider-specific Pentecost figures (provider = accommodation object)
+    if (accomProvider) {
+      // 3-day Pentecost: ~58% of weekly guests crowded into 3 days (peak demand)
+      // For Park Inn (1840/week): ~1070 guests, 2570 nights (LOS 2.4)
+      const pentecostMult = 0.58; // 3 days of peak = 58% of normal week's volume
+      baseGuests = Math.round(accomProvider.weeklyGuests * pentecostMult);
+      baseNights = Math.round(baseGuests * accomProvider.los);
+      yoyGuests = Number((accomProvider.yoyGuests + 1.0).toFixed(1));
+      yoyNights = Number((accomProvider.yoyGuests + 1.6).toFixed(1));
+      providerLabel = accomProvider.name;
+    } else if (cityName === 'Sárvár') {
       baseGuests = 4280;
       baseNights = 12410;
       yoyGuests = 7.8;
       yoyNights = 8.6;
+      providerLabel = `${cityName} szálláshelyek`;
     } else {
       const c = CITIES.find(x => x.name === cityName) || CITIES[0];
       const dailyAvg = (c.guestLow + c.guestHigh) / 2 / 7;
-      // Whitsun is a long weekend — multiplier ~2.4× normal weekend
       baseGuests = Math.round(dailyAvg * 3 * 1.85);
       baseNights = Math.round(baseGuests * 2.6);
       yoyGuests = Number(((c.yoyV - 1) * 100 + 1.4).toFixed(1));
       yoyNights = Number(((c.yoyV - 1) * 100 + 2.1).toFixed(1));
+      providerLabel = `${cityName} szálláshelyek`;
     }
   } else if (scope === 'baths') {
-    if (bathName === 'Sárvári Gyógyfürdő') {
-      // Realistic Pentecost weekend figures for Sárvári Gyógyfürdő
-      // ~700k annual tickets, peak weekend with high day-tripper share (~50%)
-      baseTickets = 9200;   // 3-day ticket sales (peak demand, ~110% of avg week)
-      baseGuests = 4850;    // unique overnight guests (~55% of tickets, rest are day-trippers)
-      baseNights = 12320;   // overnight nights (avg 2.5 nights for long weekend)
-      yoyTickets = 7.6;
-      yoyGuests = 7.2;
-      yoyNights = 8.4;
+    if (bathProvider) {
+      // 3-day Pentecost ticket sales: ~62% of weekly volume (peak)
+      // For Sárvári Gyógy- és Wellnessfürdő (13500/week): ~8370 tickets
+      const pentecostMult = 0.62;
+      baseTickets = Math.round(bathProvider.weeklyTickets * pentecostMult);
+      baseGuests = Math.round(baseTickets * 0.55); // ~55% overnight, 45% day-trippers
+      baseNights = Math.round(baseGuests * 2.5);
+      yoyTickets = Number((bathProvider.yoyTickets + 2.2).toFixed(1));
+      yoyGuests = Number((bathProvider.yoyTickets + 1.8).toFixed(1));
+      yoyNights = Number((bathProvider.yoyTickets + 3.0).toFixed(1));
+      providerLabel = bathProvider.name;
+    } else if (bathName === 'Sárvári Gyógyfürdő' || bathName === 'Sárvári Gyógy-, és Wellnessfürdő') {
+      baseTickets = 8370;
+      baseGuests = 4600;
+      baseNights = 11500;
+      yoyTickets = 7.4;
+      yoyGuests = 7.0;
+      yoyNights = 8.2;
+      providerLabel = bathName;
     } else {
       const b = BATHS.find(x => x.name === bathName) || BATHS[0];
-      baseTickets = Math.round(b.weeklyTickets * 0.62); // 3-day weekend share
+      baseTickets = Math.round(b.weeklyTickets * 0.62);
       baseGuests = Math.round(baseTickets * 0.82);
       baseNights = Math.round(baseGuests * 2.1);
       yoyGuests = Number((b.yoyTickets + 1.2).toFixed(1));
       yoyNights = Number((b.yoyTickets + 1.8).toFixed(1));
       yoyTickets = Number((b.yoyTickets + 2.4).toFixed(1));
+      providerLabel = bathName;
     }
   } else if (scope === 'food') {
-    // food / hospitality
-    foodTransactions = 1_240_000; // 3-day national hospitality transactions
-    foodRevenue = 9.4; // billion Ft (gross)
+    foodTransactions = 1_240_000;
+    foodRevenue = 9.4;
     foodBasket = 7560;
     yoyFoodTx = 7.2;
     yoyFoodRev = 9.8;
     yoyFoodBasket = 2.4;
   } else {
-    // attractions — Sárvár environs (15 km radius)
-    // Pentecost: cultural attractions + day-tripper-heavy weekend
-    attrVisitors = 14600;     // 3-day total visitors across all 8 attractions
-    attrRevenue = 56;          // M Ft total ticket revenue
+    attrVisitors = 14600;
+    attrRevenue = 56;
     attrTopCategory = 'Wellness / Élményfürdő';
     yoyAttrVisitors = 7.8;
     yoyAttrRevenue = 10.4;
@@ -477,7 +551,8 @@ function WhitsunForecast({ scope = 'accommodation', cityName, bathName }) {
           Pünkösdi hétvége (2026. május 23. – május 25.) előrejelzés
         </h2>
         <div style={{ fontSize: 12, color: B.muted, marginTop: 4, marginBottom: 18 }}>
-          {scope === 'accommodation' ? `${cityName} szálláshelyek`
+          {providerLabel ? providerLabel
+            : scope === 'accommodation' ? `${cityName} szálláshelyek`
             : scope === 'baths' ? bathName
             : scope === 'food' ? 'Magyarországi vendéglátás'
             : 'Sárvár környéki attrakciók'} · 3 napos időszak · YoY összehasonlítás 2025 pünkösdjével
@@ -750,6 +825,56 @@ function GoogleBalatonMap({ selectedCity, onSelect }) {
         display: loaded ? 'block' : 'none',
       }} />
     </>
+  );
+}
+
+// ---------- DISTRICT + PROVIDER PICKER ----------
+function DistrictProviderPicker({ district, setDistrict, provider, setProvider, providers, providerLabel, providerIcon: Icon, accent }) {
+  const providerList = providers[district] || [];
+  return (
+    <div style={{ background: B.paper, borderRadius: 4, padding: '18px 22px', border: `1px solid ${B.hair}`, marginBottom: 20 }}>
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 2fr', gap: 18, alignItems: 'start' }}>
+        <div>
+          <div style={{ fontSize: 10, letterSpacing: 1.6, textTransform: 'uppercase', color: B.muted, fontWeight: 700, marginBottom: 8 }}>
+            Járás
+          </div>
+          <select value={district} onChange={e => {
+              const newD = e.target.value;
+              setDistrict(newD);
+              // pick the first provider of the new district
+              const first = (providers[newD] || [])[0];
+              if (first) setProvider(first.name);
+            }}
+            style={{
+              width: '100%', padding: '10px 12px', borderRadius: 3,
+              border: `1px solid ${B.hairStrong}`,
+              fontFamily: FONT, fontSize: 13, fontWeight: 600, color: B.ink,
+              background: B.paper, cursor: 'pointer',
+            }}>
+            {DISTRICTS_SARVAR.map(d => <option key={d} value={d}>{d}</option>)}
+          </select>
+          <div style={{ fontSize: 11, color: B.muted, marginTop: 6 }}>
+            {providerList.length} {providerLabel.toLowerCase()} ebben a járásban
+          </div>
+        </div>
+
+        <div>
+          <div style={{ fontSize: 10, letterSpacing: 1.6, textTransform: 'uppercase', color: B.muted, fontWeight: 700, marginBottom: 8, display: 'flex', alignItems: 'center', gap: 6 }}>
+            {Icon && <Icon size={11} color={accent || B.navy} strokeWidth={2.2} />}
+            {providerLabel}
+          </div>
+          <select value={provider} onChange={e => setProvider(e.target.value)}
+            style={{
+              width: '100%', padding: '12px 14px', borderRadius: 3,
+              border: `2px solid ${accent || B.navy}`,
+              fontFamily: FONT, fontSize: 15, fontWeight: 700, color: B.navy,
+              background: B.paper, cursor: 'pointer',
+            }}>
+            {providerList.map(p => <option key={p.name} value={p.name}>{p.name}{p.city ? ` · ${p.city}` : ''}</option>)}
+          </select>
+        </div>
+      </div>
+    </div>
   );
 }
 
@@ -1350,41 +1475,36 @@ function CompetitorsView() {
 // ---------- HOSPITALITY VIEW ----------
 function HospitalityView() {
   const [horizon, setHorizon] = useState('week');
-  const [region, setRegion] = useState('Összes régió');
+  const [restDistrict, setRestDistrict] = useState('Sárvári járás');
+  const [restName, setRestName] = useState('Onyx Garden Cafe');
 
-  const REGIONS = ['Összes régió', 'Balaton', 'Budapest', 'Észak-Magyarország', 'Dél-Alföld', 'Nyugat-Dunántúl'];
-  const REGION_MULT = {
-    'Összes régió': 1.00,
-    'Balaton': 0.42,
-    'Budapest': 0.78,
-    'Észak-Magyarország': 0.34,
-    'Dél-Alföld': 0.28,
-    'Nyugat-Dunántúl': 0.36,
-  };
+  const restList = RESTAURANTS[restDistrict] || [];
+  const restaurant = restList.find(r => r.name === restName) || RESTAURANTS['Sárvári járás'][0];
 
-  const horizonScale = { day: 1/7, week: 1, month: 4.2 }[horizon];
-  const horizonLabel = { day: '1 napos', week: '1 hetes', month: '1 hónapos' }[horizon];
-  const regMult = REGION_MULT[region];
+  const horizonScale = { week: 1, month: 4.2 }[horizon];
+  const horizonLabel = { week: '1 hetes', month: '1 hónapos' }[horizon];
+  const horizonDaysCount = { week: 7, month: 30 }[horizon];
 
-  // KPIs (base: total industry weekly, scaled by region & horizon)
-  const baseTransactions = 2_840_000; // weekly nationwide
-  const transactions = Math.round(baseTransactions * regMult * horizonScale);
-  const avgBasketGross = 6840; // Ft
+  // Provider-level KPIs
+  const transactions = Math.round(restaurant.weeklyTransactions * horizonScale);
+  const avgBasketGross = restaurant.avgBasket;
   const grossRevenue = Math.round(transactions * avgBasketGross);
   const netRevenue = Math.round(grossRevenue / 1.27); // 27% ÁFA
   const avgBasketNet = Math.round(avgBasketGross / 1.27);
+  const dailyGross = Math.round(grossRevenue / horizonDaysCount);
+  const dailyNet = Math.round(netRevenue / horizonDaysCount);
 
-  // Time series — 12 weeks for chart
+  // Time series — 12 weeks for chart (provider-level)
   const weeks = [];
   for (let i = 0; i < 12; i++) {
     const seasonal = 0.78 + 0.42 * Math.sin((i - 2) * 0.45);
     const noise = 0.92 + ((i * 13) % 17) / 100;
-    const w = Math.round(baseTransactions * regMult * seasonal * noise * avgBasketGross / 1e6);
+    const w = Math.round(restaurant.weeklyTransactions * seasonal * noise * avgBasketGross / 1e6);
     weeks.push({
       week: `W${30 + i}`,
       bruttó: w,
       nettó: Math.round(w / 1.27),
-      tranzakció: Math.round(baseTransactions * regMult * seasonal * noise / 1000),
+      tranzakció: Math.round(restaurant.weeklyTransactions * seasonal * noise / 100),
     });
   }
 
@@ -1396,19 +1516,13 @@ function HospitalityView() {
     { name: 'Egyéb elektronikus',      pct: 9.8,  color: B.lake,        icon: Sparkles,   yoy: 11.4 },
   ];
 
-  // Product category breakdown
+  // Product category breakdown — provider-specific
   const products = [
-    { name: 'Étel',                     pct: 56.8, color: B.navy,        icon: UtensilsCrossed, avgItem: 4250 },
-    { name: 'Alkoholmentes ital',       pct: 16.4, color: B.blueBright,  icon: Coffee,          avgItem: 980 },
-    { name: 'Alkoholos ital',           pct: 18.2, color: B.red,         icon: Wine,            avgItem: 1840 },
-    { name: 'Egyéb tételek',            pct: 8.6,  color: B.muted,       icon: Cookie,          avgItem: 620 },
+    { name: 'Étel',                     pct: restaurant.foodPct,        color: B.navy,        icon: UtensilsCrossed, avgItem: Math.round(avgBasketGross * 0.6) },
+    { name: 'Alkoholmentes ital',       pct: restaurant.nonAlcoholPct,  color: B.blueBright,  icon: Coffee,          avgItem: Math.round(avgBasketGross * 0.12) },
+    { name: 'Alkoholos ital',           pct: restaurant.alcoholPct,     color: B.red,         icon: Wine,            avgItem: Math.round(avgBasketGross * 0.22) },
+    { name: 'Egyéb tételek',            pct: restaurant.otherPct,       color: B.muted,       icon: Cookie,          avgItem: Math.round(avgBasketGross * 0.06) },
   ];
-
-  // Vat-distinct sub-totals (driven by basket composition)
-  const dailyAvgGross = Math.round(grossRevenue / (horizonDays => ({ day: 1, week: 7, month: 30 }[horizon]))(horizon));
-  const horizonDaysCount = { day: 1, week: 7, month: 30 }[horizon];
-  const dailyGross = Math.round(grossRevenue / horizonDaysCount);
-  const dailyNet = Math.round(netRevenue / horizonDaysCount);
 
   return (
     <>
@@ -1418,44 +1532,42 @@ function HospitalityView() {
       {/* WHITSUN FORECAST */}
       <WhitsunForecast scope="food" />
 
-      {/* SELECTOR */}
-      <div style={{ background: B.paper, borderRadius: 4, padding: '20px 24px', border: `1px solid ${B.hair}`, marginBottom: 20 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-          <div style={{ flex: '1 1 280px' }}>
-            <div style={{ fontSize: 10, letterSpacing: 1.8, textTransform: 'uppercase', color: B.muted, fontWeight: 700, marginBottom: 8 }}>
-              Régió
-            </div>
-            <select value={region} onChange={e => setRegion(e.target.value)}
-              style={{
-                width: '100%', padding: '12px 14px', borderRadius: 3,
-                border: `1px solid ${B.hairStrong}`,
-                fontFamily: FONT, fontSize: 15, fontWeight: 700, color: B.navy,
-                background: B.paper, cursor: 'pointer',
-              }}>
-              {REGIONS.map(r => <option key={r} value={r}>{r}</option>)}
-            </select>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 10, fontSize: 12, color: B.inkSoft }}>
-              <UtensilsCrossed size={13} color={B.red} strokeWidth={2} />
-              Vendéglátóhelyek és éttermek forgalmi mutatói
-            </div>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-end' }}>
-            <div style={{ fontSize: 10, letterSpacing: 1.5, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>
-              Időszak
-            </div>
-            <div style={{ display: 'flex', background: B.bg, borderRadius: 3, padding: 3, border: `1px solid ${B.hair}` }}>
-              {[{v:'day',l:'1 nap'},{v:'week',l:'1 hét'},{v:'month',l:'1 hónap'}].map(h => (
-                <button key={h.v} onClick={() => setHorizon(h.v)}
-                  style={{
-                    padding: '7px 14px', border: 'none', borderRadius: 2,
-                    background: horizon === h.v ? B.navy : 'transparent',
-                    color: horizon === h.v ? B.paper : B.inkSoft,
-                    fontFamily: FONT, fontSize: 12, fontWeight: 700, cursor: 'pointer',
-                  }}>
-                  {h.l}
-                </button>
-              ))}
-            </div>
+      {/* DISTRICT + PROVIDER PICKER */}
+      <DistrictProviderPicker
+        district={restDistrict} setDistrict={setRestDistrict}
+        provider={restName} setProvider={setRestName}
+        providers={RESTAURANTS}
+        providerLabel="Étterem"
+        providerIcon={UtensilsCrossed}
+        accent={B.red}
+      />
+
+      {/* HORIZON SELECTOR + Provider info */}
+      <div style={{ background: B.paper, borderRadius: 4, padding: '14px 22px', border: `1px solid ${B.hair}`, marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 12, color: B.inkSoft, flexWrap: 'wrap' }}>
+          <UtensilsCrossed size={13} color={B.red} strokeWidth={2} />
+          <strong>{restaurant.name}</strong>
+          <span style={{ color: B.muted }}>·</span>
+          <span>{restaurant.category}</span>
+          <span style={{ color: B.muted }}>·</span>
+          <span>{restaurant.seats} fő kapacitás</span>
+          <span style={{ color: B.muted }}>·</span>
+          <span>átl. kosárérték: <strong style={{ fontFamily: FONT_MONO, color: B.navy }}>{restaurant.avgBasket.toLocaleString('hu-HU')} Ft</strong></span>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-end' }}>
+          <div style={{ fontSize: 10, letterSpacing: 1.5, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>Időszak</div>
+          <div style={{ display: 'flex', background: B.bg, borderRadius: 3, padding: 3, border: `1px solid ${B.hair}` }}>
+            {[{v:'week',l:'1 hét'},{v:'month',l:'1 hónap'}].map(h => (
+              <button key={h.v} onClick={() => setHorizon(h.v)}
+                style={{
+                  padding: '6px 12px', border: 'none', borderRadius: 2,
+                  background: horizon === h.v ? B.navy : 'transparent',
+                  color: horizon === h.v ? B.paper : B.inkSoft,
+                  fontFamily: FONT, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                }}>
+                {h.l}
+              </button>
+            ))}
           </div>
         </div>
       </div>
@@ -1466,7 +1578,7 @@ function HospitalityView() {
         <h2 style={{ fontSize: 17, margin: 0, fontWeight: 700, letterSpacing: -0.2, color: B.navy }}>
           Forgalmi adatok
         </h2>
-        <span style={{ fontSize: 11, color: B.muted, fontWeight: 500 }}>· {horizonLabel} kitekintés · {region}</span>
+        <span style={{ fontSize: 11, color: B.muted, fontWeight: 500 }}>· {horizonLabel} kitekintés · {restaurant.name}</span>
       </div>
 
       <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 14 }}>
@@ -1705,16 +1817,31 @@ function HospitalityView() {
 
 // ---------- BATHS VIEW ----------
 function BathsView() {
-  const [bathName, setBathName] = useState('Sárvári Gyógyfürdő');
+  const [bathDistrict, setBathDistrict] = useState('Sárvári járás');
+  const [bathName, setBathName] = useState('Sárvári Gyógy-, és Wellnessfürdő');
   const [horizon, setHorizon] = useState('week');
-  const bath = BATHS.find(b => b.name === bathName);
-  const profile = BATH_NAT_PROFILES[bathName];
 
-  const horizonDays = { day: 1, week: 7, month: 30 }[horizon];
-  const horizonLabel = { day: '1 napos', week: '1 hetes', month: '1 hónapos' }[horizon];
+  // Resolve bath: try SPAS (district-level) first, fall back to BATHS (top-15) for backward compat
+  const spasList = SPAS[bathDistrict] || [];
+  const spaProvider = spasList.find(s => s.name === bathName);
+  const bath = spaProvider
+    ? {
+        ...spaProvider,
+        region: bathDistrict,
+        nearbyCities: bathDistrict === 'Sárvári járás'
+          ? [{name:'Sárvár',w:5000},{name:'Szombathely',w:1400},{name:'Celldömölk',w:380},{name:'Ikervár',w:220}]
+          : bathDistrict === 'Szombathelyi járás'
+          ? [{name:'Szombathely',w:2200},{name:'Sárvár',w:680},{name:'Vasvár',w:240}]
+          : [{name:'Kőszeg',w:1200},{name:'Szombathely',w:520},{name:'Cák',w:90}],
+      }
+    : BATHS.find(b => b.name === bathName) || BATHS[0];
+  const profile = BATH_NAT_PROFILES[bathName] || BATH_NAT_PROFILES['Sárvári Gyógyfürdő'];
+
+  const horizonDays = { week: 7, month: 30 }[horizon];
+  const horizonLabel = { week: '1 hetes', month: '1 hónapos' }[horizon];
 
   // Scale weekly figures to horizon (day = /7, week = ×1, month = ×4.3 with some damping)
-  const horizonScale = { day: 1/7, week: 1, month: 4.1 }[horizon];
+  const horizonScale = { week: 1, month: 4.1 }[horizon];
   const tickets = Math.round(bath.weeklyTickets * horizonScale);
   const revenue = Math.round(tickets * bath.avgTicket);
   const addonCount = Math.round(tickets * bath.addonPerTicket);
@@ -1762,50 +1889,42 @@ function BathsView() {
       <LocationFilterBar activeCity={bath.city} />
 
       {/* WHITSUN FORECAST */}
-      <WhitsunForecast scope="baths" bathName={bathName} />
+      <WhitsunForecast scope="baths" bathName={bathName} bathProvider={spaProvider} />
 
-      {/* BATH SELECTOR */}
-      <div style={{ background: B.paper, borderRadius: 4, padding: '20px 24px', border: `1px solid ${B.hair}`, marginBottom: 20 }}>
-        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 16 }}>
-          <div style={{ flex: '1 1 340px', minWidth: 260 }}>
-            <div style={{ fontSize: 10, letterSpacing: 1.8, textTransform: 'uppercase', color: B.muted, fontWeight: 700, marginBottom: 8 }}>
-              Fürdő kiválasztása
-            </div>
-            <select value={bathName} onChange={e => setBathName(e.target.value)}
-              style={{
-                width: '100%', padding: '12px 14px', borderRadius: 3,
-                border: `1px solid ${B.hairStrong}`,
-                fontFamily: FONT, fontSize: 15, fontWeight: 700, color: B.navy,
-                background: B.paper, cursor: 'pointer',
-              }}>
-              {BATHS.map(b => <option key={b.name} value={b.name}>{b.name} · {b.city}</option>)}
-            </select>
-            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginTop: 10, fontSize: 12, color: B.inkSoft }}>
-              <MapPin size={13} color={B.lake} strokeWidth={2} />
-              <strong>{bath.city}</strong>
-              <span style={{ color: B.muted }}>·</span>
-              <span>{bath.region}</span>
-              <span style={{ color: B.muted }}>·</span>
-              <span>átlagos jegyár: <strong style={{ fontFamily: FONT_MONO, color: B.navy }}>{bath.avgTicket.toLocaleString('hu-HU')} Ft</strong></span>
-            </div>
-          </div>
-          <div style={{ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'flex-end' }}>
-            <div style={{ fontSize: 10, letterSpacing: 1.5, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>
-              Előrejelzési horizont
-            </div>
-            <div style={{ display: 'flex', background: B.bg, borderRadius: 3, padding: 3, border: `1px solid ${B.hair}` }}>
-              {[{v:'day',l:'1 nap'},{v:'week',l:'1 hét'},{v:'month',l:'1 hónap'}].map(h => (
-                <button key={h.v} onClick={() => setHorizon(h.v)}
-                  style={{
-                    padding: '7px 14px', border: 'none', borderRadius: 2,
-                    background: horizon === h.v ? B.navy : 'transparent',
-                    color: horizon === h.v ? B.paper : B.inkSoft,
-                    fontFamily: FONT, fontSize: 12, fontWeight: 700, cursor: 'pointer',
-                  }}>
-                  {h.l}
-                </button>
-              ))}
-            </div>
+      {/* DISTRICT + PROVIDER PICKER */}
+      <DistrictProviderPicker
+        district={bathDistrict} setDistrict={setBathDistrict}
+        provider={bathName} setProvider={setBathName}
+        providers={SPAS}
+        providerLabel="Fürdő"
+        providerIcon={Droplets}
+        accent={B.lake}
+      />
+
+      {/* HORIZON SELECTOR */}
+      <div style={{ background: B.paper, borderRadius: 4, padding: '14px 22px', border: `1px solid ${B.hair}`, marginBottom: 20, display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: 12 }}>
+        <div style={{ display: 'flex', alignItems: 'center', gap: 10, fontSize: 12, color: B.inkSoft }}>
+          <MapPin size={13} color={B.lake} strokeWidth={2} />
+          <strong>{bath.city}</strong>
+          <span style={{ color: B.muted }}>·</span>
+          <span>átlagos jegyár: <strong style={{ fontFamily: FONT_MONO, color: B.navy }}>{bath.avgTicket.toLocaleString('hu-HU')} Ft</strong></span>
+          <span style={{ color: B.muted }}>·</span>
+          <span>külföldi vendég: <strong style={{ color: B.navy }}>{bath.foreignPct || '–'}%</strong></span>
+        </div>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 6, alignItems: 'flex-end' }}>
+          <div style={{ fontSize: 10, letterSpacing: 1.5, textTransform: 'uppercase', color: B.muted, fontWeight: 700 }}>Időszak</div>
+          <div style={{ display: 'flex', background: B.bg, borderRadius: 3, padding: 3, border: `1px solid ${B.hair}` }}>
+            {[{v:'week',l:'1 hét'},{v:'month',l:'1 hónap'}].map(h => (
+              <button key={h.v} onClick={() => setHorizon(h.v)}
+                style={{
+                  padding: '6px 12px', border: 'none', borderRadius: 2,
+                  background: horizon === h.v ? B.navy : 'transparent',
+                  color: horizon === h.v ? B.paper : B.inkSoft,
+                  fontFamily: FONT, fontSize: 12, fontWeight: 700, cursor: 'pointer',
+                }}>
+                {h.l}
+              </button>
+            ))}
           </div>
         </div>
       </div>
@@ -2007,8 +2126,8 @@ function AttractionsView() {
   const [horizon, setHorizon] = useState('week');
   const [sortBy, setSortBy] = useState('visitors'); // 'visitors' | 'distance' | 'yoy'
 
-  const horizonScale = { day: 1/7, week: 1, month: 4.1 }[horizon];
-  const horizonLabel = { day: '1 napos', week: '1 hetes', month: '1 hónapos' }[horizon];
+  const horizonScale = { week: 1, month: 4.1 }[horizon];
+  const horizonLabel = { week: '1 hetes', month: '1 hónapos' }[horizon];
 
   const sorted = [...ATTRACTIONS].map(a => {
     const visitors = Math.round(a.weeklyVisitors * horizonScale);
@@ -2068,7 +2187,7 @@ function AttractionsView() {
               Időszak
             </div>
             <div style={{ display: 'flex', background: B.bg, borderRadius: 3, padding: 3, border: `1px solid ${B.hair}` }}>
-              {[{v:'day',l:'1 nap'},{v:'week',l:'1 hét'},{v:'month',l:'1 hónap'}].map(h => (
+              {[{v:'week',l:'1 hét'},{v:'month',l:'1 hónap'}].map(h => (
                 <button key={h.v} onClick={() => setHorizon(h.v)}
                   style={{
                     padding: '7px 14px', border: 'none', borderRadius: 2,
@@ -2221,6 +2340,131 @@ function AttractionsView() {
         </div>
       </div>
 
+      {/* AGE + NATIONALITIES BREAKDOWN */}
+      <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: 20, marginBottom: 20 }}>
+
+        {/* AGE GROUPS */}
+        <div style={{ background: B.paper, borderRadius: 4, padding: '24px 28px', border: `1px solid ${B.hair}` }}>
+          <h2 style={{ fontSize: 18, margin: '0 0 4px', fontWeight: 700, letterSpacing: -0.2 }}>
+            Életkori megoszlás · jegyértékesítés alapján
+          </h2>
+          <div style={{ fontSize: 12, color: B.muted, marginBottom: 18 }}>
+            Várható jegyértékesítés korcsoportonként · {horizonLabel}
+          </div>
+          {(() => {
+            const ageGroups = [
+              { label: '0–14 év',  pct: 18.4, color: B.blueBright, icon: '👶' },
+              { label: '15–24 év', pct: 13.2, color: B.lake,       icon: '🎓' },
+              { label: '25–44 év', pct: 32.6, color: B.navy,       icon: '👨' },
+              { label: '45–64 év', pct: 25.8, color: B.gold,       icon: '🧑' },
+              { label: '65+ év',   pct: 10.0, color: B.red,        icon: '👵' },
+            ];
+            return (
+              <>
+                <div style={{ display: 'flex', height: 38, borderRadius: 3, overflow: 'hidden', marginBottom: 16 }}>
+                  {ageGroups.map(a => (
+                    <div key={a.label} style={{
+                      flex: a.pct, background: a.color,
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      color: '#FFFFFF', fontSize: 12, fontWeight: 700,
+                    }}>
+                      {a.pct >= 10 ? `${a.pct}%` : ''}
+                    </div>
+                  ))}
+                </div>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+                  {ageGroups.map(a => {
+                    const count = Math.round(totalVisitors * a.pct / 100);
+                    return (
+                      <div key={a.label} style={{
+                        display: 'flex', alignItems: 'center', gap: 12,
+                        padding: '8px 12px', background: B.bg, borderRadius: 3,
+                        borderLeft: `3px solid ${a.color}`,
+                      }}>
+                        <span style={{ fontSize: 18 }}>{a.icon}</span>
+                        <div style={{ flex: 1 }}>
+                          <div style={{ fontSize: 13, fontWeight: 700, color: B.ink }}>{a.label}</div>
+                          <div style={{ fontFamily: FONT_MONO, fontSize: 11, color: B.muted, marginTop: 1 }}>
+                            {count.toLocaleString('hu-HU')} fő · {a.pct}%
+                          </div>
+                        </div>
+                        <div style={{ fontFamily: FONT_MONO, fontSize: 14, fontWeight: 700, color: a.color }}>
+                          {a.pct}%
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+              </>
+            );
+          })()}
+        </div>
+
+        {/* TOP 5 NATIONALITIES — FORECAST */}
+        <div style={{ background: B.paper, borderRadius: 4, padding: '24px 28px', border: `1px solid ${B.hair}` }}>
+          <h2 style={{ fontSize: 18, margin: '0 0 4px', fontWeight: 700, letterSpacing: -0.2 }}>
+            Top 5 külföldi küldőpiac · előrejelzés
+          </h2>
+          <div style={{ fontSize: 12, color: B.muted, marginBottom: 18 }}>
+            Várható %-arány az összes külföldi látogatóból · YoY változás 2025-höz képest
+          </div>
+          {(() => {
+            const foreignPct = 38; // 38% foreign visitors at Sárvár attractions
+            const foreignVisitors = Math.round(totalVisitors * foreignPct / 100);
+            const top5 = [
+              { name: 'Ausztria',     pct: 15.5, yoy: 8.6, color: B.blue },
+              { name: 'Németország',  pct: 9.0,  yoy: 6.4, color: B.blueBright },
+              { name: 'Csehország',   pct: 4.8,  yoy: 5.4, color: B.lake },
+              { name: 'Lengyelország', pct: 3.6, yoy: 9.0, color: B.lakeShallow },
+              { name: 'Olaszország',  pct: 2.6,  yoy: 4.6, color: B.lakeDeep },
+            ];
+            return (
+              <>
+                <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                  {top5.map((n, i) => {
+                    const shareOfForeign = Number((n.pct / foreignPct * 100).toFixed(1));
+                    const count = Math.round(totalVisitors * n.pct / 100);
+                    return (
+                      <div key={n.name}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'baseline', marginBottom: 5, gap: 8, flexWrap: 'wrap' }}>
+                          <div style={{ display: 'flex', alignItems: 'baseline', gap: 12, minWidth: 0 }}>
+                            <span style={{ fontSize: 20, color: B.muted, fontWeight: 500 }}>
+                              {String(i + 1).padStart(2, '0')}
+                            </span>
+                            <span style={{ fontSize: 15, fontWeight: 700, color: B.ink }}>{n.name}</span>
+                            <span style={{ fontSize: 11, color: B.muted }}>
+                              {count.toLocaleString('hu-HU')} fő · {n.pct}%
+                            </span>
+                          </div>
+                          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                            <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontFamily: FONT_MONO, fontSize: 12, fontWeight: 700, color: B.green }}>
+                              <TrendingUp size={11} strokeWidth={2.5} />
+                              +{n.yoy}%
+                            </span>
+                            <span style={{ fontFamily: FONT_MONO, fontSize: 16, fontWeight: 700, color: B.blue }}>
+                              {shareOfForeign}%
+                            </span>
+                          </div>
+                        </div>
+                        <div style={{ background: B.bg, height: 5, borderRadius: 2, overflow: 'hidden' }}>
+                          <div style={{ width: `${shareOfForeign}%`, height: '100%', background: n.color }} />
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
+                <div style={{ marginTop: 16, paddingTop: 12, borderTop: `1px solid ${B.hair}`, fontSize: 11, color: B.muted, display: 'flex', justifyContent: 'space-between' }}>
+                  <span>Külföldi vendég összesen</span>
+                  <span style={{ fontFamily: FONT_MONO, color: B.ink, fontWeight: 700 }}>
+                    {foreignPct}% · {foreignVisitors.toLocaleString('hu-HU')} fő
+                  </span>
+                </div>
+              </>
+            );
+          })()}
+        </div>
+      </div>
+
       {/* HATÁSOK */}
       <IntlTrendsBox />
 
@@ -2244,12 +2488,17 @@ export default function BalatonDashboard() {
   const [horizon, setHorizon] = useState('month');
   const [tab, setTab] = useState('main');
 
+  // District + provider for each tab
+  const [accomDistrict, setAccomDistrict] = useState('Sárvári járás');
+  const [accomProvider, setAccomProvider] = useState('Park Inn by Radisson Sárvár Resort & Spa');
+  const accom = (ACCOMMODATIONS[accomDistrict] || []).find(a => a.name === accomProvider) || ACCOMMODATIONS['Sárvári járás'][0];
+
   const days = useMemo(() => generateDays(city), [city]);
   const nats = useMemo(() => getNationalities(city), [city]);
   const cityMeta = CITIES.find(c => c.name === city);
 
-  const horizonDays = { day: 1, week: 7, month: 30 }[horizon];
-  const horizonLabel = { day: '1 napos', week: '1 hetes', month: '1 hónapos' }[horizon];
+  const horizonDays = { week: 7, month: 30 }[horizon];
+  const horizonLabel = { week: '1 hetes', month: '1 hónapos' }[horizon];
   // Forecast window: from today (May 15 – one week before Whitsun weekend May 23–25) forward
   const todayIdx = days.findIndex(d => d.date === '2026-05-15');
   const windowStart = todayIdx >= 0 ? todayIdx : 0;
@@ -2272,12 +2521,17 @@ export default function BalatonDashboard() {
                           .sort((a, b) => b.pct - a.pct);
   const foreignGuests = Math.round(totalGuests * foreign / 100);
   const natLabelMap = { 'Német': 'Németország', 'Lengyel': 'Lengyelország', 'Cseh': 'Csehország', 'Osztrák': 'Ausztria', 'Olasz': 'Olaszország' };
-  const top5WithCounts = top5Foreign.map(n => ({
-    ...n,
-    displayName: natLabelMap[n.name] || n.name,
-    count: Math.round(totalGuests * n.pct / 100),
-    shareOfForeign: Number((n.pct / foreign * 100).toFixed(1))
-  }));
+  const top5WithCounts = top5Foreign.map((n, i) => {
+    // YoY forecast: country-specific growth rates for 2026 vs 2025
+    const yoyMap = { 'Osztrák': 8.4, 'Német': 6.2, 'Cseh': 5.6, 'Lengyel': 9.2, 'Olasz': 4.8 };
+    return {
+      ...n,
+      displayName: natLabelMap[n.name] || n.name,
+      count: Math.round(totalGuests * n.pct / 100),
+      shareOfForeign: Number((n.pct / foreign * 100).toFixed(1)),
+      yoy: yoyMap[n.name] || 5.0,
+    };
+  });
 
   const weekly = useMemo(() => {
     const buckets = {};
@@ -2295,7 +2549,7 @@ export default function BalatonDashboard() {
       .map(w => ({ ...w, label: new Date(w.week).toLocaleDateString('hu-HU', { month: 'short', day: 'numeric' }) }));
   }, [days, cityMeta]);
 
-  const today = new Date('2026-05-16');
+  const today = new Date('2026-05-15');
   const todayIso = '2026-05-15';
   const todayStr = today.toLocaleDateString('hu-HU', { year: 'numeric', month: 'long', day: 'numeric', weekday: 'long' });
 
@@ -2343,7 +2597,7 @@ export default function BalatonDashboard() {
               Előrejelzési horizont
             </div>
             <div style={{ display: 'flex', background: 'rgba(255,255,255,0.08)', borderRadius: 3, padding: 3, border: '1px solid rgba(255,255,255,0.18)' }}>
-              {[{v:'day',l:'1 nap'},{v:'week',l:'1 hét'},{v:'month',l:'1 hónap'}].map(h => (
+              {[{v:'week',l:'1 hét'},{v:'month',l:'1 hónap'}].map(h => (
                 <button key={h.v} onClick={() => setHorizon(h.v)}
                   style={{
                     padding: '7px 16px', border: 'none', borderRadius: 2,
@@ -2428,8 +2682,43 @@ export default function BalatonDashboard() {
             {/* LOCATION FILTER */}
             <LocationFilterBar activeCity={city} />
 
+            {/* DISTRICT + PROVIDER PICKER */}
+            <DistrictProviderPicker
+              district={accomDistrict} setDistrict={setAccomDistrict}
+              provider={accomProvider} setProvider={setAccomProvider}
+              providers={ACCOMMODATIONS}
+              providerLabel="Szálláshely"
+              providerIcon={Star}
+              accent={B.navy}
+            />
+
+            {/* PROVIDER KPIs */}
+            <div style={{ display: 'flex', alignItems: 'center', gap: 10, marginBottom: 10 }}>
+              <TrendingUp size={16} color={B.navy} strokeWidth={2.2} />
+              <h2 style={{ fontSize: 17, margin: 0, fontWeight: 700, letterSpacing: -0.2, color: B.navy }}>
+                Előrejelzés
+              </h2>
+              <span style={{ fontSize: 11, color: B.muted, fontWeight: 500 }}>· {horizonLabel} · {accom.name}</span>
+            </div>
+            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 20 }}>
+              <KpiCard
+                label={`Vendég · ${horizonLabel}`}
+                value={Math.round(accom.weeklyGuests * (horizon === 'week' ? 1 : 4.1)).toLocaleString('hu-HU')}
+                unit="fő" delta={accom.yoyGuests} icon={Users} accent={B.blue} />
+              <KpiCard
+                label={`Vendégéjszaka · ${horizonLabel}`}
+                value={Math.round(accom.weeklyGuests * accom.los * (horizon === 'week' ? 1 : 4.1)).toLocaleString('hu-HU')}
+                unit="éj" delta={Number((accom.yoyGuests + 0.4).toFixed(1))} icon={Moon} accent={B.lake} />
+              <KpiCard
+                label="Szobakihasználtság"
+                value={accom.occupancy + '%'} unit={`${accom.rooms} szoba`} delta={2.4} icon={Star} accent={B.gold} />
+              <KpiCard
+                label="Javasolt szobaár (ADR)"
+                value={accom.avgAdr.toLocaleString('hu-HU')} unit="Ft" delta={accom.yoyAdr} icon={Banknote} accent={B.red} />
+            </div>
+
             {/* WHITSUN FORECAST */}
-            <WhitsunForecast scope="accommodation" cityName={city} />
+            <WhitsunForecast scope="accommodation" cityName={city} accomProvider={accom} />
 
             {/* TOP CITY SELECTOR */}
             <TopCitySelector selectedCity={city} onSelect={setCity} />
@@ -2456,7 +2745,10 @@ export default function BalatonDashboard() {
             {/* INTERNATIONAL TRENDS */}
             <IntlTrendsBox />
 
-            {/* KPIs */}
+            {/* OLD city-level KPIs (Sárvár default) */}
+            <h3 style={{ fontSize: 14, color: B.muted, fontWeight: 700, letterSpacing: 1, textTransform: 'uppercase', marginTop: 8, marginBottom: 12 }}>
+              Település szintű adatok · {city}
+            </h3>
             <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: 14, marginBottom: 20 }}>
               <KpiCard label={`Vendég · ${horizonLabel}`} value={totalGuests.toLocaleString('hu-HU')} unit="fő" delta={guestsYoY} icon={Users} accent={B.blue} />
               <KpiCard label="Vendégéjszaka" value={totalNights.toLocaleString('hu-HU')} unit="éj" delta={nightsYoY} icon={Moon} accent={B.lake} />
@@ -2595,10 +2887,10 @@ export default function BalatonDashboard() {
 
               <div style={{ background: B.paper, borderRadius: 4, padding: '24px 28px', border: `1px solid ${B.hair}` }}>
                 <h2 style={{ fontSize: 20, margin: '0 0 4px', fontWeight: 700, letterSpacing: -0.3 }}>
-                  Top 5 külföldi küldőpiac
+                  Top 5 külföldi küldőpiac · előrejelzés
                 </h2>
                 <div style={{ fontSize: 12, color: B.muted, marginBottom: 18 }}>
-                  %-arány az összes külföldi vendégből
+                  Várható %-arány az összes külföldi vendégből · YoY változás 2025-höz képest
                 </div>
                 <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
                   {top5WithCounts.map((n, i) => (
@@ -2613,9 +2905,15 @@ export default function BalatonDashboard() {
                             {n.count.toLocaleString('hu-HU')} fő · {n.pct}%
                           </span>
                         </div>
-                        <span style={{ fontFamily: FONT_MONO, fontSize: 16, fontWeight: 700, color: B.blue }}>
-                          {n.shareOfForeign}%
-                        </span>
+                        <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
+                          <span style={{ display: 'inline-flex', alignItems: 'center', gap: 3, fontFamily: FONT_MONO, fontSize: 12, fontWeight: 700, color: B.green }}>
+                            <TrendingUp size={11} strokeWidth={2.5} />
+                            +{n.yoy}%
+                          </span>
+                          <span style={{ fontFamily: FONT_MONO, fontSize: 16, fontWeight: 700, color: B.blue }}>
+                            {n.shareOfForeign}%
+                          </span>
+                        </div>
                       </div>
                       <div style={{ background: B.bg, height: 5, borderRadius: 2, overflow: 'hidden' }}>
                         <div style={{ width: `${n.shareOfForeign}%`, height: '100%', background: [B.blue, B.blueBright, B.lake, B.lakeShallow, B.lakeDeep][i] }} />
